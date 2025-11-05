@@ -47,6 +47,11 @@ public class UsuarioService {
             }
 
             UsuarioModel nuevoUsuario = new UsuarioModel();
+
+            if (usuarioRepository.existsByNombreUsuario(agregarUsuarioDTO.getNombreUsuario())) {
+                throw new UsuarioSaveException("El nombre de usuario ya se encuentra registrado");
+            }
+
             nuevoUsuario.setCorreo(agregarUsuarioDTO.getCorreo());
 
             String hash = PASSWORD_ENCODER.encode(agregarUsuarioDTO.getContrasena());

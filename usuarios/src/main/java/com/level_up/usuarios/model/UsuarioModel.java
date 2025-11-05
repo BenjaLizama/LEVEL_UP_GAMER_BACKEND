@@ -33,7 +33,7 @@ public class UsuarioModel {
     @Column(nullable = false)
     private LocalDate fechaNacimiento;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nombreUsuario;
 
     @Column(nullable = true)
