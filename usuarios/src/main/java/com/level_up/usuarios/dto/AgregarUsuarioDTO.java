@@ -35,6 +35,7 @@ public class AgregarUsuarioDTO {
     private LocalDate fechaNacimiento;
 
     @NotBlank(message = "El nombre de usuario no puede estar vacío.")
+    @Pattern(regexp = "^[^\\s]+$", message = "El nombre de usuario no puede contener espacios.")
     @Size(min = 3, max = 30, message = "El nombre de usuario debe tener entre 3 y 30 caracteres.")
     private String nombreUsuario;
 }

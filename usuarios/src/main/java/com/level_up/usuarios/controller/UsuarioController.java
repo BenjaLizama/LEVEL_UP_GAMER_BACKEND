@@ -1,5 +1,6 @@
 package com.level_up.usuarios.controller;
 
+import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
 import com.level_up.usuarios.dto.LoginDTO;
 import com.level_up.usuarios.exception.UsuarioNotFoundException;
@@ -61,6 +62,17 @@ public class UsuarioController {
     public ResponseEntity<UsuarioModel> iniciarSesion(@RequestBody LoginDTO loginDTO) {
         UsuarioModel usuarioLogeado = usuarioService.validarCredenciales(loginDTO.getCorreo(), loginDTO.getContrasena());
         return ResponseEntity.ok(usuarioLogeado);
+    }
+
+    @Operation(summary = "Actualizar informacion del usuario")
+    @ApiResponse(responseCode = "200", description = "Usuario actualizado con exito")
+    @PutMapping("/{idUsuario}/update")
+    public ResponseEntity<UsuarioModel> actualizarInformacionUsuario(
+            @PathVariable Long idUsuario,
+            @Valid @RequestBody ActualizarUsuarioDTO actualizarUsuarioDTO
+    ) {
+        UsuarioModel usuarioActualizado = usuarioService.actualizarInformacionUsuario(idUsuario, actualizarUsuarioDTO);
+        return ResponseEntity.ok(usuarioActualizado);
     }
 
     @GetMapping("/test404")

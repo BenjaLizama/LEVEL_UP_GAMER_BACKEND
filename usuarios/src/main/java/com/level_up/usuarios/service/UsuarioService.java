@@ -1,5 +1,6 @@
 package com.level_up.usuarios.service;
 
+import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
 import com.level_up.usuarios.exception.UsuarioLoginException;
 import com.level_up.usuarios.exception.UsuarioNotFoundException;
@@ -91,6 +92,47 @@ public class UsuarioService {
         }
 
         return usuario;
+    }
+
+    public UsuarioModel actualizarInformacionUsuario(Long idUsuario, ActualizarUsuarioDTO actualizarUsuarioDTO) {
+        try {
+            UsuarioModel usuarioEncontrado = usuarioRepository.findById(idUsuario)
+                    .orElseThrow(() -> new UsuarioNotFoundException("No se ha encontrado el usuario con ID: " + idUsuario));
+
+            if (actualizarUsuarioDTO.getNombre() != null && !actualizarUsuarioDTO.getNombre().isBlank()) {
+                usuarioEncontrado.setNombre(actualizarUsuarioDTO.getNombre());
+            }
+
+            if (actualizarUsuarioDTO.getApellido() != null && !actualizarUsuarioDTO.getApellido().isBlank()) {
+                usuarioEncontrado.setApellido(actualizarUsuarioDTO.getApellido());
+            }
+
+            if (actualizarUsuarioDTO.getContrasena() != null && !actualizarUsuarioDTO.getContrasena().isBlank()) {
+                String contrasena = actualizarUsuarioDTO.getContrasena();
+                if (contrasena.length() < 6) {
+                    throw new UsuarioUpdateException("La contraseña debe tener al menos 6 caracteres.");
+                }
+                if (contrasena.contains(" ")) {
+                    throw new UsuarioUpdateException("La contraseña no puede contener espacios.");
+                }
+                usuarioEncontrado.setContrasena(PASSWORD_ENCODER.encode(contrasena));
+            }
+
+            if (actualizarUsuarioDTO.getNombreUsuario() != null &&
+                    !actualizarUsuarioDTO.getNombreUsuario().isBlank() &&
+                    !usuarioEncontrado.getNombreUsuario().equals(actualizarUsuarioDTO.getNombreUsuario())) {
+
+                if (usuarioRepository.existsByNombreUsuario(actualizarUsuarioDTO.getNombreUsuario())) {
+                    throw new UsuarioUpdateException("El nombre de usuario ya está en uso.");
+                }
+                usuarioEncontrado.setNombreUsuario(actualizarUsuarioDTO.getNombreUsuario());
+            }
+
+            return usuarioRepository.save(usuarioEncontrado);
+
+        } catch (DataAccessException e) {
+            throw new UsuarioUpdateException("Error al actualizar el usuario: " + e.getMessage(), e);
+        }
     }
 
     public UsuarioModel actualizarImagenPerfil(Long idUsuario, MultipartFile imagen, String urlImagen) {
