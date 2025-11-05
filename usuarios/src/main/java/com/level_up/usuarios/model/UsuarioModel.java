@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Table(name = "usuarios")
 @Entity
 @Data
@@ -27,6 +29,9 @@ public class UsuarioModel {
 
     @Column(nullable = false)
     private String apellido;
+
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento;
 
     @Column(nullable = false)
     private String nombreUsuario;

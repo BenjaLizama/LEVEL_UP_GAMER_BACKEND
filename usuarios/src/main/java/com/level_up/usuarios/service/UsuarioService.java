@@ -55,6 +55,7 @@ public class UsuarioService {
             nuevoUsuario.setNombreUsuario(agregarUsuarioDTO.getNombreUsuario());
             nuevoUsuario.setNombre(agregarUsuarioDTO.getNombre());
             nuevoUsuario.setApellido(agregarUsuarioDTO.getApellido());
+            nuevoUsuario.setFechaNacimiento(agregarUsuarioDTO.getFechaNacimiento());
 
             usuarioRepository.save(nuevoUsuario);
 
