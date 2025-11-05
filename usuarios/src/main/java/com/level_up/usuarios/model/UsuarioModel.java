@@ -31,4 +31,7 @@ public class UsuarioModel {
     @Column(nullable = false)
     private String nombreUsuario;
 
+    @Column(nullable = true)
+    private String imagenPerfilURL;
+
 }

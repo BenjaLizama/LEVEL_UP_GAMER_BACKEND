@@ -1,8 +1,10 @@
 package com.level_up.usuarios.service;
 
-import com.level_up.usuarios.dto.UsuarioDTO;
+import com.level_up.usuarios.dto.AgregarUsuarioDTO;
+import com.level_up.usuarios.exception.UsuarioLoginException;
 import com.level_up.usuarios.exception.UsuarioNotFoundException;
 import com.level_up.usuarios.exception.UsuarioSaveException;
+import com.level_up.usuarios.exception.UsuarioUpdateException;
 import com.level_up.usuarios.model.UsuarioModel;
 import com.level_up.usuarios.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -10,8 +12,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Optional;
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.MemoryCacheImageOutputStream;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Iterator;
+import java.util.UUID;
 
 @Service
 @Transactional(rollbackOn = Exception.class)
@@ -20,30 +37,31 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    private final long MAX_BYTES = 1_500_000;
 
-    public UsuarioModel save(UsuarioDTO usuarioDTO) {
+    public UsuarioModel save(AgregarUsuarioDTO agregarUsuarioDTO) {
         try {
-            if (usuarioRepository.existsByCorreo(usuarioDTO.getCorreo())) {
+            if (usuarioRepository.existsByCorreo(agregarUsuarioDTO.getCorreo())) {
                 throw new UsuarioSaveException("El correo ya se encuentra registrado.");
             }
 
             UsuarioModel nuevoUsuario = new UsuarioModel();
-            nuevoUsuario.setCorreo(usuarioDTO.getCorreo());
+            nuevoUsuario.setCorreo(agregarUsuarioDTO.getCorreo());
 
-            String hash = passwordEncoder.encode(usuarioDTO.getContrasena());
+            String hash = PASSWORD_ENCODER.encode(agregarUsuarioDTO.getContrasena());
             nuevoUsuario.setContrasena(hash);
 
-            nuevoUsuario.setNombreUsuario(usuarioDTO.getNombreUsuario());
-            nuevoUsuario.setNombre(usuarioDTO.getNombre());
-            nuevoUsuario.setApellido(usuarioDTO.getApellido());
+            nuevoUsuario.setNombreUsuario(agregarUsuarioDTO.getNombreUsuario());
+            nuevoUsuario.setNombre(agregarUsuarioDTO.getNombre());
+            nuevoUsuario.setApellido(agregarUsuarioDTO.getApellido());
 
             usuarioRepository.save(nuevoUsuario);
 
             return nuevoUsuario;
 
         } catch (DataAccessException e) {
-            throw new UsuarioSaveException("Error al guardar el usuario", e);
+            throw new UsuarioSaveException("Error al guardar el usuario: ", e);
         }
     }
 
@@ -57,4 +75,180 @@ public class UsuarioService {
             throw new UsuarioNotFoundException("Error inesperado al buscar al usuario.", e);
         }
     }
+
+    public UsuarioModel validarCredenciales(String correo, String contrasena) {
+        UsuarioModel usuario = usuarioRepository.findByCorreo(correo)
+                .orElseThrow(() -> new UsuarioNotFoundException("Correo o contraseña incorrectos."));
+
+        if (!PASSWORD_ENCODER.matches(contrasena, usuario.getContrasena())) {
+            throw new UsuarioLoginException("Contraseña incorrecta.");
+        }
+
+        return usuario;
+    }
+
+    public UsuarioModel actualizarImagenPerfil(Long idUsuario, MultipartFile imagen, String urlImagen) {
+        UsuarioModel usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new UsuarioUpdateException("No se ha encontrado el usuario con ID: " + idUsuario));
+
+        byte[] imagenBytes;
+        String formato;
+
+        try {
+            String imagenActual = usuario.getImagenPerfilURL();
+
+            if (imagen != null) {
+                // Validar tipo de archivo
+                formato = obtenerFormatoImagen(imagen.getOriginalFilename());
+                imagenBytes = imagen.getBytes();
+            } else {
+                if (urlImagen == null || urlImagen.isBlank()) {
+                    throw new UsuarioUpdateException("Debe enviar una imagen o URL válida.");
+                }
+                URL url = new URL(urlImagen);
+                URLConnection conn = url.openConnection();
+                String contentType = conn.getContentType();
+                if (contentType == null || !contentType.startsWith("image/")) {
+                    throw new UsuarioUpdateException("La URL no apunta a una imagen válida.");
+                }
+                formato = obtenerFormatoImagen(url.getPath());
+                try (InputStream in = conn.getInputStream()) {
+                    imagenBytes = in.readAllBytes();
+                }
+            }
+
+            // Comprimir/redimensionar segun tipo
+            imagenBytes = comprimirYRedimensionarImagen(imagenBytes, formato);
+
+            // Eliminar la imagen antigua si existe
+            if (imagenActual != null && !imagenActual.isBlank()) {
+                File archivoAntiguo = new File(imagenActual);
+                if (archivoAntiguo.exists()) {
+                    archivoAntiguo.delete();
+                }
+            }
+
+            // Guardar la imagen en el servidor
+            String rutaImagen = guardarImagen(imagenBytes, formato);
+            usuario.setImagenPerfilURL(rutaImagen);
+
+            return usuarioRepository.save(usuario);
+        } catch (IOException e) {
+            throw new UsuarioUpdateException("Error al procesar la imagen: " + e.getMessage());
+        }
+    }
+
+    private String obtenerFormatoImagen(String nombreArchivo) {
+        if (nombreArchivo == null || !nombreArchivo.contains(".")) {
+            return "jpg";
+        }
+        String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1).toLowerCase();
+        switch (extension) {
+            case "png":
+                return "png";
+            case "webp":
+                return "webp";
+            case "jpg":
+            case "jpeg":
+            default:
+                return "jpg";
+        }
+    }
+
+    private String guardarImagen(byte[] imagenBytes, String formato) throws IOException {
+        String nombreArchivo = UUID.randomUUID() + "." + formato;
+        Path ruta = Paths.get("uploads/" + nombreArchivo);
+        Files.createDirectories(ruta.getParent());
+        Files.write(ruta, imagenBytes);
+        return ruta.toString();
+    }
+
+    private byte[] comprimirYRedimensionarImagen(byte[] original, String formato) throws IOException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(original);
+        BufferedImage imagen = ImageIO.read(bis);
+        if (imagen == null) throw new UsuarioUpdateException("El archivo no es una imagen válida.");
+
+        int maxWidth = 1024;
+        int maxHeight = 1024;
+        int width = imagen.getWidth();
+        int height = imagen.getHeight();
+        if (width > maxWidth || height > maxHeight) {
+            float ratio = Math.min((float) maxWidth / width, (float) maxHeight / height);
+            int newWidth = Math.round(width * ratio);
+            int newHeight = Math.round(height * ratio);
+            Image tmp = imagen.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+            BufferedImage resized = new BufferedImage(newWidth, newHeight,
+                    imagen.getColorModel().hasAlpha() ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = resized.createGraphics();
+            g2d.drawImage(tmp, 0, 0, null);
+            g2d.dispose();
+            imagen = resized;
+        }
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(formato);
+        if (!writers.hasNext()) throw new UsuarioUpdateException("No hay escritor de imágenes disponible para formato: " + formato);
+        ImageWriter writer = writers.next();
+        ImageWriteParam param = writer.getDefaultWriteParam();
+
+        if ("jpg".equalsIgnoreCase(formato) && param.canWriteCompressed()) {
+            param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+            param.setCompressionQuality(0.7f);
+        }
+
+        writer.setOutput(new MemoryCacheImageOutputStream(bos));
+        writer.write(null, new IIOImage(imagen, null, null), param);
+        writer.dispose();
+
+        byte[] bytesFinales = bos.toByteArray();
+
+        if (bytesFinales.length > MAX_BYTES) {
+            if ("jpg".equalsIgnoreCase(formato)) {
+                float quality = 0.6f;
+                while (bytesFinales.length > MAX_BYTES && quality > 0.1f) {
+                    try (ByteArrayOutputStream tempBos = new ByteArrayOutputStream();
+                         MemoryCacheImageOutputStream output = new MemoryCacheImageOutputStream(tempBos)) {
+
+                        Iterator<ImageWriter> tempWriters = ImageIO.getImageWritersByFormatName(formato);
+                        if (!tempWriters.hasNext()) break;
+                        ImageWriter tempWriter = tempWriters.next();
+
+                        ImageWriteParam tempParam = tempWriter.getDefaultWriteParam();
+                        tempParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+                        tempParam.setCompressionQuality(quality);
+
+                        tempWriter.setOutput(output);
+                        tempWriter.write(null, new IIOImage(imagen, null, null), tempParam);
+                        tempWriter.dispose();
+
+                        bytesFinales = tempBos.toByteArray();
+                    }
+                    quality -= 0.1f;
+                }
+            } else if ("png".equalsIgnoreCase(formato) || "webp".equalsIgnoreCase(formato)) {
+                int w = imagen.getWidth();
+                int h = imagen.getHeight();
+                float scale = 0.9f;
+                while (bytesFinales.length > MAX_BYTES && w > 100 && h > 100) {
+                    w = Math.round(w * scale);
+                    h = Math.round(h * scale);
+
+                    Image tmp = imagen.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+                    BufferedImage resized = new BufferedImage(w, h,
+                            imagen.getColorModel().hasAlpha() ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
+                    Graphics2D g2d = resized.createGraphics();
+                    g2d.drawImage(tmp, 0, 0, null);
+                    g2d.dispose();
+                    imagen = resized;
+
+                    ByteArrayOutputStream tempBos = new ByteArrayOutputStream();
+                    ImageIO.write(imagen, formato, tempBos);
+                    bytesFinales = tempBos.toByteArray();
+                }
+            }
+        }
+
+        return bytesFinales;
+    }
+
 }
