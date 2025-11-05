@@ -2,13 +2,11 @@ package com.level_up.usuarios.service;
 
 import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
-import com.level_up.usuarios.exception.UsuarioLoginException;
-import com.level_up.usuarios.exception.UsuarioNotFoundException;
-import com.level_up.usuarios.exception.UsuarioSaveException;
-import com.level_up.usuarios.exception.UsuarioUpdateException;
+import com.level_up.usuarios.exception.*;
 import com.level_up.usuarios.model.UsuarioModel;
 import com.level_up.usuarios.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -132,6 +130,17 @@ public class UsuarioService {
 
         } catch (DataAccessException e) {
             throw new UsuarioUpdateException("Error al actualizar el usuario: " + e.getMessage(), e);
+        }
+    }
+
+    public void eliminarUsuario(Long idUsuario) {
+        try {
+            UsuarioModel usuario = usuarioRepository.findById(idUsuario)
+                    .orElseThrow(() -> new UsuarioNotFoundException("No se ha encontrado el usuario con ID: " + idUsuario));
+
+            usuarioRepository.delete(usuario);
+        } catch (DataAccessException e) {
+            throw new UsuarioDeleteException("Error inesperado al eliminar el usuario: " + e.getMessage(), e);
         }
     }
 

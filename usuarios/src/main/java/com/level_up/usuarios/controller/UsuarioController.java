@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,24 +26,34 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    // ✅ Obtener usuario
     @Operation(summary = "Obtener usuario por su ID")
     @ApiResponse(responseCode = "200", description = "Usuario encontrado")
+    @ApiResponse(responseCode = "404", description = "No se encontro el recurso")
+    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioModel> obtenerUsuario(@PathVariable Long id) {
         UsuarioModel usuarioEncontrado = usuarioService.findById(id);
         return ResponseEntity.ok(usuarioEncontrado);
     }
 
+    // ✅ Crear usuario
     @Operation(summary = "Agregar usuario")
-    @ApiResponse(responseCode = "200", description = "Usuario agregado")
-    @PostMapping("/agregar")
+    @ApiResponse(responseCode = "201", description = "Usuario creado con exito")
+    @ApiResponse(responseCode = "409", description = "Conflicto en los campos, violacion de restriccion")
+    @ApiResponse(responseCode = "422", description = "Los datos son validos pero no tienen sentido")
+    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
+    @PostMapping
     public ResponseEntity<UsuarioModel> agregarUsuario(@Valid @RequestBody AgregarUsuarioDTO agregarUsuarioDTO) {
         UsuarioModel nuevoUsuario = usuarioService.save(agregarUsuarioDTO);
-        return ResponseEntity.ok(nuevoUsuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
     }
 
+    // ✅ Actualizar imagen de perfil
     @Operation(summary = "Actualizar imagen de perfil del usuario")
     @ApiResponse(responseCode = "200", description = "Imagen de perfil actualizada")
+    @ApiResponse(responseCode = "400", description = "Se enviaron datos mal formados o invalidos")
+    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @PutMapping("/{idUsuario}/imagen")
     public ResponseEntity<UsuarioModel> actualizarImagenPerfil(
             @PathVariable Long idUsuario,
@@ -56,17 +68,24 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioActualizado);
     }
 
+    // ✅ Iniciar sesion
     @Operation(summary = "Iniciar sesion como usuario")
     @ApiResponse(responseCode = "200", description = "Inicio de sesion exitoso")
-    @GetMapping("/login")
+    @ApiResponse(responseCode = "401", description = "No se proporcionaron credenciales validas")
+    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
+    @PostMapping("/login")
     public ResponseEntity<UsuarioModel> iniciarSesion(@RequestBody LoginDTO loginDTO) {
         UsuarioModel usuarioLogeado = usuarioService.validarCredenciales(loginDTO.getCorreo(), loginDTO.getContrasena());
         return ResponseEntity.ok(usuarioLogeado);
     }
 
+    // ✅ Actualizar usuario
     @Operation(summary = "Actualizar informacion del usuario")
     @ApiResponse(responseCode = "200", description = "Usuario actualizado con exito")
-    @PutMapping("/{idUsuario}/update")
+    @ApiResponse(responseCode = "404", description = "No se ha encontrado el usuario")
+    @ApiResponse(responseCode = "409", description = "Conflicto en los campos, violacion de restriccion")
+    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
+    @PutMapping("/{idUsuario}")
     public ResponseEntity<UsuarioModel> actualizarInformacionUsuario(
             @PathVariable Long idUsuario,
             @Valid @RequestBody ActualizarUsuarioDTO actualizarUsuarioDTO
@@ -75,8 +94,14 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioActualizado);
     }
 
-    @GetMapping("/test404")
-    public void test() {
-        throw new UsuarioNotFoundException("Prueba error 404.");
+    // ✅ Eliminar usuario
+    @Operation(summary = "Eliminar usuario")
+    @ApiResponse(responseCode = "204", description = "Usuario eliminado con exito")
+    @ApiResponse(responseCode = "404", description = "No se ha encontrado el usuario")
+    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
+    @DeleteMapping("/{idUsuario}")
+    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long idUsuario) {
+        usuarioService.eliminarUsuario(idUsuario);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("mensaje", "Error al guardar el usuario");
         respuesta.put("error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(respuesta);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(respuesta); // 409
     }
 
     @ExceptionHandler(UsuarioUpdateException.class)
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("mensaje", "Error al iniciar sesion");
         respuesta.put("error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(respuesta);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(respuesta);
     }
 
     @ExceptionHandler(UsuarioNotFoundException.class)
@@ -41,6 +41,13 @@ public class GlobalExceptionHandler {
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("mensaje", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+    }
+
+    @ExceptionHandler(UsuarioDeleteException.class)
+    public ResponseEntity<Map<String, Object>> handleUsuarioDeleteException(UsuarioDeleteException ex) {
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("mensaje", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -56,5 +63,13 @@ public class GlobalExceptionHandler {
         respuesta.put("errores", errores);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(respuesta);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGeneralException(Exception ex) {
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("mensaje", "Error interno del servidor");
+        respuesta.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
     }
 }
