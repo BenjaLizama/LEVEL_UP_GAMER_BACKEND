@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "usuarios")
 @Entity
@@ -39,4 +41,9 @@ public class UsuarioModel {
     @Column(nullable = true)
     private String imagenPerfilURL;
 
+    @Column(name = "stripe_costumer_id", nullable = true)
+    private String stripeCostumerId;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MetodoPagoModel> metodosPago = new ArrayList<>();
 }

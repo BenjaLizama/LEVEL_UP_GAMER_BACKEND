@@ -3,17 +3,16 @@ package com.level_up.usuarios.controller;
 import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
 import com.level_up.usuarios.dto.LoginDTO;
-import com.level_up.usuarios.exception.UsuarioNotFoundException;
 import com.level_up.usuarios.exception.UsuarioUpdateException;
 import com.level_up.usuarios.model.UsuarioModel;
 import com.level_up.usuarios.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -74,8 +73,9 @@ public class UsuarioController {
     @ApiResponse(responseCode = "401", description = "No se proporcionaron credenciales validas")
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @PostMapping("/login")
-    public ResponseEntity<UsuarioModel> iniciarSesion(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<UsuarioModel> iniciarSesion(@RequestBody LoginDTO loginDTO, HttpSession session) {
         UsuarioModel usuarioLogeado = usuarioService.validarCredenciales(loginDTO.getCorreo(), loginDTO.getContrasena());
+        session.setAttribute("usuarioId", usuarioLogeado.getIdUsuario());
         return ResponseEntity.ok(usuarioLogeado);
     }
 
