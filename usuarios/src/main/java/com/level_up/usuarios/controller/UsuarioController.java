@@ -71,12 +71,22 @@ public class UsuarioController {
     @Operation(summary = "Iniciar sesion como usuario")
     @ApiResponse(responseCode = "200", description = "Inicio de sesion exitoso")
     @ApiResponse(responseCode = "401", description = "No se proporcionaron credenciales validas")
-    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
+    @ApiResponse(responseCode = "500", description = "Error inesperado o no controlado")
     @PostMapping("/login")
     public ResponseEntity<UsuarioModel> iniciarSesion(@RequestBody LoginDTO loginDTO, HttpSession session) {
         UsuarioModel usuarioLogeado = usuarioService.validarCredenciales(loginDTO.getCorreo(), loginDTO.getContrasena());
         session.setAttribute("usuarioId", usuarioLogeado.getIdUsuario());
         return ResponseEntity.ok(usuarioLogeado);
+    }
+
+    // ✅ Cerrar sesion
+    @Operation(summary = "Cerrar la sesion")
+    @ApiResponse(responseCode = "204", description = "El usuario cerro sesion con exito")
+    @ApiResponse(responseCode = "500", description = "Error inesperado o no controlado")
+    @PostMapping("/logout")
+    public ResponseEntity<Void> cerrarSesion(HttpSession session) {
+        session.invalidate();
+        return ResponseEntity.noContent().build();
     }
 
     // ✅ Actualizar usuario

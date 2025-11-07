@@ -43,7 +43,4 @@ public class UsuarioModel {
 
     @Column(name = "stripe_costumer_id", nullable = true)
     private String stripeCostumerId;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MetodoPagoModel> metodosPago = new ArrayList<>();
 }
