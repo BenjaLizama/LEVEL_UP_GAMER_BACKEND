@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,6 +43,11 @@ public class ProductoService {
             nuevoProducto.setPrecioProducto(productoDTO.getPrecioProducto());
             nuevoProducto.setCategoriaProducto(categoriaActual);
 
+            if (productoDTO.getImagenesUrl().isEmpty()) {
+                throw new ProductoSaveException("Error al agregar el producto, debe contener al menos 1 imagen");
+            }
+            nuevoProducto.setImagenesUrl(productoDTO.getImagenesUrl());
+
             String codigoProducto = prefijo + "-" + indice;
 
             if (productoRepository.existsByCodigoProducto(codigoProducto)) {
@@ -57,8 +63,7 @@ public class ProductoService {
 
             ProductoModel productoGuardado = productoRepository.save(nuevoProducto);
 
-            ProductoRetornoDTO retorno = modelMapper.map(productoGuardado, ProductoRetornoDTO.class);
-            retorno.setStockProducto(productoGuardado.getStock().getCantidad());
+            ProductoRetornoDTO retorno = mapperProductoRetorno(productoGuardado);
 
             return retorno;
 
@@ -79,14 +84,29 @@ public class ProductoService {
         }
     }
 
-    public ProductoModel findById(Long productoId) {
+    public ProductoRetornoDTO findById(Long productoId) {
         try {
             ProductoModel producto = productoRepository.findById(productoId)
                     .orElseThrow(() -> new ProductoNotFoundException("No se encontro el producto con ID: " + productoId));
 
-            return producto;
+            ProductoRetornoDTO productoMapeado = mapperProductoRetorno(producto);
+
+            return productoMapeado;
         } catch (DataAccessException e) {
             throw new ProductoNotFoundException("Error inesperado al buscar el producto: " + e.getMessage());
+        }
+    }
+
+    public ProductoRetornoDTO findByCodigoProducto(String codigoProducto) {
+        try {
+
+            ProductoModel productoEncontrado = productoRepository.findByCodigoProducto(codigoProducto)
+                    .orElseThrow(() -> new ProductoNotFoundException("El producto con codigo: " + codigoProducto + " no existe"));
+
+            return mapperProductoRetorno(productoEncontrado);
+
+        } catch (DataAccessException e) {
+            throw new ProductoNotFoundException("Error inesperado al buscar el producto: " + e.getMessage(), e);
         }
     }
 
@@ -99,15 +119,21 @@ public class ProductoService {
         }
     }
 
-    public List<ProductoModel> filtrarProductosPorCategoria(CategoriaEnum categoria) {
+    public List<ProductoRetornoDTO> filtrarProductosPorCategoria(CategoriaEnum categoria) {
         try {
             List<ProductoModel> lista_productos_encontrados = productoRepository.findByCategoriaProducto(categoria);
+            List<ProductoRetornoDTO> lista_productos_encontrados_retorno = new ArrayList<>();
 
             if (lista_productos_encontrados.isEmpty()) {
                 throw new ListaProductosException("No existen productos con categoria " + categoria.toString().toLowerCase() + " para mostrar");
             }
 
-            return lista_productos_encontrados;
+            for (ProductoModel producto : lista_productos_encontrados) {
+                ProductoRetornoDTO producto_filtrado = mapperProductoRetorno(producto);
+                lista_productos_encontrados_retorno.add(producto_filtrado);
+            }
+
+            return lista_productos_encontrados_retorno;
         } catch (DataAccessException e) {
             throw new ListaProductosException("Error inesperado al filtrar productos: " + e.getMessage(), e);
         }
@@ -133,4 +159,16 @@ public class ProductoService {
         return String.format("%03d", nuevaCantidad);
     }
 
+    private ProductoRetornoDTO mapperProductoRetorno(ProductoModel producto) {
+        ProductoRetornoDTO productoRetorno = new ProductoRetornoDTO();
+
+        productoRetorno.setCodigoProducto(producto.getCodigoProducto());
+        productoRetorno.setNombreProducto(producto.getNombreProducto());
+        productoRetorno.setDescripcionProducto(producto.getDescripcionProducto());
+        productoRetorno.setPrecioProducto(producto.getPrecioProducto());
+        productoRetorno.setImagenesUrl(producto.getImagenesUrl());
+        productoRetorno.setCantidadStockProducto(producto.getStock().getCantidad());
+
+        return productoRetorno;
+    }
 }

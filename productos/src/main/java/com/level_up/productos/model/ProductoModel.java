@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Table(name = "productos")
 @Entity
 @Data
@@ -32,6 +35,11 @@ public class ProductoModel {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CategoriaEnum categoriaProducto;
+
+    @ElementCollection
+    @CollectionTable(name = "producto_imagenes", joinColumns = @JoinColumn(name = "id_producto"))
+    @Column(name = "imagen_url")
+    private List<String> imagenesUrl = new ArrayList<>();
 
     @OneToOne(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private StockModel stock;

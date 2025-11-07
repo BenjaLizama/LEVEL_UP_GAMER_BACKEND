@@ -8,12 +8,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductoRepository extends JpaRepository<ProductoModel, Long> {
 
     List<ProductoModel> findByCategoriaProducto(CategoriaEnum categoria);
     List<ProductoModel> findByPrecioProductoBetween(Double min, Double max);
+    Optional<ProductoModel> findByCodigoProducto(String codigoProducto);
     Long countByCategoriaProducto(CategoriaEnum categoria);
     Boolean existsByCodigoProducto(String codigoProducto);
 

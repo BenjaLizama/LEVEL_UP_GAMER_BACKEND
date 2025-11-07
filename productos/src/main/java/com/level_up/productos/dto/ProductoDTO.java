@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
+
+import java.util.List;
 
 @Data
 public class ProductoDTO {
@@ -24,6 +27,10 @@ public class ProductoDTO {
 
     @NotNull(message = "La categoria no puede ser nula.")
     private CategoriaEnum categoriaProducto;
+
+    @NotNull(message = "La lista de imagenes no puede ser nula.")
+    @Size(min = 1, message = "Debes añadir al menos una imagen.")
+    private List<@URL(message = "Una de las imagenes no es una URL valida") String> imagenesUrl;
 
     // Datos para el stock
     @NotNull(message = "La cantidad inicial es obligatoria.")
