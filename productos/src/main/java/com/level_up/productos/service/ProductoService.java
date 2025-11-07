@@ -11,12 +11,10 @@ import com.level_up.productos.model.ProductoModel;
 import com.level_up.productos.model.StockModel;
 import com.level_up.productos.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,9 +23,6 @@ public class ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
 
     public ProductoRetornoDTO agregarProducto(ProductoDTO productoDTO) {
         try {
@@ -84,6 +79,18 @@ public class ProductoService {
         }
     }
 
+    public List<ProductoRetornoDTO> findAll() {
+        List<ProductoModel> lista_productos = productoRepository.findAll();
+
+        if (lista_productos.isEmpty()) {
+            throw new ListaProductosException("No hay productos que mostrar");
+        }
+
+        return lista_productos.stream()
+                .map(producto -> mapperProductoRetorno(producto))
+                .toList();
+    }
+
     public ProductoRetornoDTO findById(Long productoId) {
         try {
             ProductoModel producto = productoRepository.findById(productoId)
@@ -122,23 +129,21 @@ public class ProductoService {
     public List<ProductoRetornoDTO> filtrarProductosPorCategoria(CategoriaEnum categoria) {
         try {
             List<ProductoModel> lista_productos_encontrados = productoRepository.findByCategoriaProducto(categoria);
-            List<ProductoRetornoDTO> lista_productos_encontrados_retorno = new ArrayList<>();
 
             if (lista_productos_encontrados.isEmpty()) {
                 throw new ListaProductosException("No existen productos con categoria " + categoria.toString().toLowerCase() + " para mostrar");
             }
 
-            for (ProductoModel producto : lista_productos_encontrados) {
-                ProductoRetornoDTO producto_filtrado = mapperProductoRetorno(producto);
-                lista_productos_encontrados_retorno.add(producto_filtrado);
-            }
+            return lista_productos_encontrados.stream()
+                    .map(producto -> mapperProductoRetorno(producto))
+                    .toList();
 
-            return lista_productos_encontrados_retorno;
         } catch (DataAccessException e) {
             throw new ListaProductosException("Error inesperado al filtrar productos: " + e.getMessage(), e);
         }
     }
 
+    /*
     public List<ProductoModel> filtrarProductosPorPrecio(Double min, Double max) {
         try {
             List<ProductoModel> lista_productos_encontrados = productoRepository.findByPrecioProductoBetween(min, max);
@@ -151,6 +156,35 @@ public class ProductoService {
         } catch (DataAccessException e) {
             throw new ListaProductosException("Error inesperado al filtrar productos por precio: " + e.getMessage(), e);
         }
+    } */
+
+    public ProductoRetornoDTO actualizarProducto(String codigoProducto, ProductoDTO productoDTO) {
+        ProductoModel producto = productoRepository.findByCodigoProducto(codigoProducto)
+                .orElseThrow(() -> new ProductoNotFoundException("El producto con codigo: " + codigoProducto + " no existe"));
+
+        if (productoDTO.getNombreProducto() != null && !productoDTO.getNombreProducto().isBlank()) {
+            producto.setNombreProducto(productoDTO.getNombreProducto());
+        }
+
+        if (productoDTO.getDescripcionProducto() != null && !productoDTO.getDescripcionProducto().isBlank()) {
+            producto.setDescripcionProducto(productoDTO.getDescripcionProducto());
+        }
+
+        if (productoDTO.getPrecioProducto() != null && productoDTO.getPrecioProducto() > 0) {
+            producto.setPrecioProducto(productoDTO.getPrecioProducto());
+        }
+
+        if (productoDTO.getImagenesUrl() != null && !productoDTO.getImagenesUrl().isEmpty()) {
+            producto.setImagenesUrl(productoDTO.getImagenesUrl());
+        }
+
+        if (productoDTO.getCantidadInicial() != null && productoDTO.getCantidadInicial() >= 0) {
+            producto.getStock().setCantidad(productoDTO.getCantidadInicial());
+        }
+
+        productoRepository.save(producto);
+
+        return mapperProductoRetorno(producto);
     }
 
     private String obtenerIndiceProductoRegistradoPorCategoria(CategoriaEnum categoria) {

@@ -22,7 +22,7 @@ public class ProductoDTO {
     private String descripcionProducto;
 
     @NotNull(message = "El precio del producto no puede ser nulo.")
-    @Min(value = 1, message = "El precio del producto no puede ser cero o menor.")
+    @Min(value = 0, message = "El precio del producto no puede menor a cero.")
     private Double precioProducto;
 
     @NotNull(message = "La categoria no puede ser nula.")

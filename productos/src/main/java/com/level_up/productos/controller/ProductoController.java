@@ -45,6 +45,17 @@ public class ProductoController {
         return ResponseEntity.noContent().build();
     }
 
+    // ✅ Obtener todos los productos
+    @Operation(summary = "Obtener todos los productos")
+    @ApiResponse(responseCode = "200", description = "Se obtuvo el recurso correctamente")
+    @ApiResponse(responseCode = "404", description = "No se encontro el recurso")
+    @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    @GetMapping
+    public ResponseEntity<List<ProductoRetornoDTO>> obtenerTodosLosProductos() {
+        List<ProductoRetornoDTO> lista_productos = productoService.findAll();
+        return ResponseEntity.ok(lista_productos);
+    }
+
     // ✅ Buscar producto con ID
     @Operation(summary = "Buscar producto por ID")
     @ApiResponse(responseCode = "200", description = "Se obtuvo el recurso correctamente")

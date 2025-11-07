@@ -45,6 +45,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(respuesta);
     }
 
+    @ExceptionHandler(ListaProductosException.class)
+    public ResponseEntity<Map<String, Object>> handleListaProductosException(ListaProductosException ex) {
+        Map<String, Object> respuesta = new HashMap<>();
+        respuesta.put("mensaje", "No se encontraron productos");
+        respuesta.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errores = new HashMap<>();
