@@ -7,7 +7,6 @@ import com.level_up.usuarios.exception.*;
 import com.level_up.usuarios.model.UsuarioModel;
 import com.level_up.usuarios.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -65,11 +64,19 @@ public class UsuarioService {
             nuevoUsuario.setApellido(agregarUsuarioDTO.getApellido());
             nuevoUsuario.setFechaNacimiento(agregarUsuarioDTO.getFechaNacimiento());
 
-            usuarioRepository.save(nuevoUsuario);
+            UsuarioModel usuarioGuardado = usuarioRepository.save(nuevoUsuario);
 
-            carritoFeignClient.inicializarCarrito(nuevoUsuario.getIdUsuario());
+            try {
+                carritoFeignClient.inicializarCarrito(usuarioGuardado.getIdUsuario());
+            } catch (Exception errorFeign) {
+                System.err.println(
+                        "ADVERTENCIA: El usuario " + usuarioGuardado.getIdUsuario() +
+                        "se creo, pero fallo la inicializacion automatica del carrito: " +
+                        errorFeign.getMessage()
+                );
+            }
 
-            return nuevoUsuario;
+            return usuarioGuardado;
 
         } catch (DataAccessException e) {
             throw new UsuarioSaveException("Error al guardar el usuario: ", e);

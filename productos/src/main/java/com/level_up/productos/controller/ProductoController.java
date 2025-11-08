@@ -40,7 +40,7 @@ public class ProductoController {
     @ApiResponse(responseCode = "409", description = "Conflicto al intentar eliminar el recurso")
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     @DeleteMapping("/delete/{codigoProducto}")
-    public ResponseEntity<Void> eliminarProducto(@PathVariable String codigoProducto) {
+    public ResponseEntity<Void> eliminarProducto(@PathVariable("codigoProducto") String codigoProducto) {
         productoService.eliminarProducto(codigoProducto);
         return ResponseEntity.noContent().build();
     }
@@ -62,7 +62,7 @@ public class ProductoController {
     @ApiResponse(responseCode = "404", description = "No se encontro el recurso")
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     @GetMapping("/{idProducto}")
-    public ResponseEntity<ProductoRetornoDTO> encontrarProductoPorId(@PathVariable Long idProducto) {
+    public ResponseEntity<ProductoRetornoDTO> encontrarProductoPorId(@PathVariable("idProducto") Long idProducto) {
         ProductoRetornoDTO productoEncontrado = productoService.findById(idProducto);
         return ResponseEntity.ok(productoEncontrado);
     }
@@ -73,7 +73,7 @@ public class ProductoController {
     @ApiResponse(responseCode = "404", description = "No se encontro el recurso")
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     @GetMapping("/code/{codigoProducto}")
-    public ResponseEntity<ProductoRetornoDTO> encontrarProductoPorCodigo(@PathVariable String codigoProducto) {
+    public ResponseEntity<ProductoRetornoDTO> encontrarProductoPorCodigo(@PathVariable("codigoProducto") String codigoProducto) {
         ProductoRetornoDTO productoEncontrado = productoService.findByCodigoProducto(codigoProducto);
         return ResponseEntity.ok(productoEncontrado);
     }

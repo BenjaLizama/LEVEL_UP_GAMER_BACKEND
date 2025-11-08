@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api/usuarios")
 @Tag(name = "Gestion de usuarios", description = "Endpoints para crear, leer, actualizar y eliminar usuarios")
 public class UsuarioController {
 
@@ -31,7 +31,7 @@ public class UsuarioController {
     @ApiResponse(responseCode = "404", description = "No se encontro el recurso")
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioModel> obtenerUsuario(@PathVariable Long id) {
+    public ResponseEntity<UsuarioModel> obtenerUsuario(@PathVariable("id") Long id) {
         UsuarioModel usuarioEncontrado = usuarioService.findById(id);
         return ResponseEntity.ok(usuarioEncontrado);
     }
@@ -55,7 +55,7 @@ public class UsuarioController {
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @PutMapping("/{idUsuario}/imagen")
     public ResponseEntity<UsuarioModel> actualizarImagenPerfil(
-            @PathVariable Long idUsuario,
+            @PathVariable("idUsuario") Long idUsuario,
             @RequestParam(value = "imagen", required = false)MultipartFile imagen,
             @RequestParam(value = "urlImagen", required = false) String urlImagen
     ) {
@@ -97,7 +97,7 @@ public class UsuarioController {
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @PutMapping("/{idUsuario}")
     public ResponseEntity<UsuarioModel> actualizarInformacionUsuario(
-            @PathVariable Long idUsuario,
+            @PathVariable("idUsuario") Long idUsuario,
             @Valid @RequestBody ActualizarUsuarioDTO actualizarUsuarioDTO
     ) {
         UsuarioModel usuarioActualizado = usuarioService.actualizarInformacionUsuario(idUsuario, actualizarUsuarioDTO);
@@ -110,7 +110,7 @@ public class UsuarioController {
     @ApiResponse(responseCode = "404", description = "No se ha encontrado el usuario")
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @DeleteMapping("/{idUsuario}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long idUsuario) {
+    public ResponseEntity<Void> eliminarUsuario(@PathVariable("idUsuario") Long idUsuario) {
         usuarioService.eliminarUsuario(idUsuario);
         return ResponseEntity.noContent().build();
     }
