@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carrito/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/CarritoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/CarritoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carrito/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/UsuariosApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/UsuariosApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="35AoKoNF6dM3xePKDBsb3IUA5Xa" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CarritoApp.executor": "Run",
+    "Application.ProductosApp.executor": "Run",
+    "Application.UsuariosApp.executor": "Run",
+    "Maven.usuarios [clean].executor": "Run",
+    "Maven.usuarios [deploy].executor": "Run",
+    "Maven.usuarios [install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RunManager" selected="Compound.App">
+    <configuration name="CarritoApp" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.CarritoApplication" />
+      <module name="carrito" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductosApp" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.ProductosApplication" />
+      <module name="productos" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuariosApp" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.UsuariosApplication" />
+      <module name="usuarios" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="CompoundRunConfigurationType">
+      <toRun name="CarritoApp" type="Application" />
+      <toRun name="ProductosApp" type="Application" />
+      <toRun name="UsuariosApp" type="Application" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.CarritoApp" />
+      <item itemvalue="Application.ProductosApp" />
+      <item itemvalue="Application.UsuariosApp" />
+      <item itemvalue="Compound.App" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="" />
+      <created>1762562176339</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762562176339</updated>
+    </task>
+    <servers />
+  </component>
+</project>

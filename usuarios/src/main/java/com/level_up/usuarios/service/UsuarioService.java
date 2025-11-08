@@ -1,5 +1,6 @@
 package com.level_up.usuarios.service;
 
+import com.level_up.usuarios.client.CarritoFeignClient;
 import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
 import com.level_up.usuarios.exception.*;
@@ -36,6 +37,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private CarritoFeignClient carritoFeignClient;
+
     private final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     private final long MAX_BYTES = 1_500_000;
 
@@ -62,6 +66,8 @@ public class UsuarioService {
             nuevoUsuario.setFechaNacimiento(agregarUsuarioDTO.getFechaNacimiento());
 
             usuarioRepository.save(nuevoUsuario);
+
+            carritoFeignClient.inicializarCarrito(nuevoUsuario.getIdUsuario());
 
             return nuevoUsuario;
 
