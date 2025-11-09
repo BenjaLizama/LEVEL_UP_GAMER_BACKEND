@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/productos")
+@CrossOrigin
 @Tag(name = "Gestion de productos", description = "Endpoints para gestionar los productos")
 public class ProductoController {
 
