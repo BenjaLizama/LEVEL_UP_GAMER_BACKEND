@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/config/DataInitializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/controller/CarritoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/controller/CarritoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/exception/GlobalExceptionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

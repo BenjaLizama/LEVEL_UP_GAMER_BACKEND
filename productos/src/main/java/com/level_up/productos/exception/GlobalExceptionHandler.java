@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
         Map<String, Object> respuesta = new HashMap<>();
         respuesta.put("mensaje", "No se encontraron productos");
         respuesta.put("error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(respuesta);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
