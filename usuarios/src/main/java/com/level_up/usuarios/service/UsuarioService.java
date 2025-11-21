@@ -3,6 +3,7 @@ package com.level_up.usuarios.service;
 import com.level_up.usuarios.client.CarritoFeignClient;
 import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
+import com.level_up.usuarios.dto.UsuarioRetornoDTO;
 import com.level_up.usuarios.exception.*;
 import com.level_up.usuarios.model.UsuarioModel;
 import com.level_up.usuarios.repository.UsuarioRepository;
@@ -38,6 +39,9 @@ public class UsuarioService {
 
     @Autowired
     private CarritoFeignClient carritoFeignClient;
+
+    @Autowired
+    private JwtService jwtService;
 
     private final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     private final long MAX_BYTES = 1_500_000;
@@ -103,6 +107,21 @@ public class UsuarioService {
         }
 
         return usuario;
+    }
+
+    public UsuarioRetornoDTO iniciarSesion(String correo, String contrasena) {
+        UsuarioModel usuario = validarCredenciales(correo, contrasena);
+        UsuarioRetornoDTO usuarioRetorno = new UsuarioRetornoDTO();
+
+        String jwt = jwtService.generarToken(usuario);
+
+        usuarioRetorno.setIdUsuario(usuario.getIdUsuario());
+        usuarioRetorno.setNombre(usuario.getNombre());
+        usuarioRetorno.setApellido(usuario.getApellido());
+        usuarioRetorno.setCorreo(usuarioRetorno.getCorreo());
+        usuarioRetorno.setToken(jwt);
+
+        return usuarioRetorno;
     }
 
     public UsuarioModel actualizarInformacionUsuario(Long idUsuario, ActualizarUsuarioDTO actualizarUsuarioDTO) {

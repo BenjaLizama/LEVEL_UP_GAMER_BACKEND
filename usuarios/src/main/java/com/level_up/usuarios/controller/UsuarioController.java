@@ -3,6 +3,7 @@ package com.level_up.usuarios.controller;
 import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
 import com.level_up.usuarios.dto.LoginDTO;
+import com.level_up.usuarios.dto.UsuarioRetornoDTO;
 import com.level_up.usuarios.exception.UsuarioUpdateException;
 import com.level_up.usuarios.model.UsuarioModel;
 import com.level_up.usuarios.service.UsuarioService;
@@ -74,9 +75,8 @@ public class UsuarioController {
     @ApiResponse(responseCode = "401", description = "No se proporcionaron credenciales validas")
     @ApiResponse(responseCode = "500", description = "Error inesperado o no controlado")
     @PostMapping("/login")
-    public ResponseEntity<UsuarioModel> iniciarSesion(@RequestBody LoginDTO loginDTO, HttpSession session) {
-        UsuarioModel usuarioLogeado = usuarioService.validarCredenciales(loginDTO.getCorreo(), loginDTO.getContrasena());
-        session.setAttribute("usuarioId", usuarioLogeado.getIdUsuario());
+    public ResponseEntity<UsuarioRetornoDTO> iniciarSesion(@RequestBody LoginDTO loginDTO, HttpSession session) {
+        UsuarioRetornoDTO usuarioLogeado = usuarioService.iniciarSesion(loginDTO.getCorreo(), loginDTO.getContrasena());
         return ResponseEntity.ok(usuarioLogeado);
     }
 
