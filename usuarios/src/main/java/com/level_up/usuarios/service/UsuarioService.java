@@ -119,7 +119,7 @@ public class UsuarioService {
         usuarioRetorno.setNombreUsuario(usuario.getNombreUsuario());
         usuarioRetorno.setNombre(usuario.getNombre());
         usuarioRetorno.setApellido(usuario.getApellido());
-        usuarioRetorno.setCorreo(usuarioRetorno.getCorreo());
+        usuarioRetorno.setCorreo(usuario.getCorreo());
         usuarioRetorno.setToken(jwt);
 
         return usuarioRetorno;
