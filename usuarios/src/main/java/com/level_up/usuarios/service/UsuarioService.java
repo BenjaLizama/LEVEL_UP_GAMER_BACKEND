@@ -116,6 +116,7 @@ public class UsuarioService {
         String jwt = jwtService.generarToken(usuario);
 
         usuarioRetorno.setIdUsuario(usuario.getIdUsuario());
+        usuarioRetorno.setNombreUsuario(usuario.getNombreUsuario());
         usuarioRetorno.setNombre(usuario.getNombre());
         usuarioRetorno.setApellido(usuario.getApellido());
         usuarioRetorno.setCorreo(usuarioRetorno.getCorreo());
