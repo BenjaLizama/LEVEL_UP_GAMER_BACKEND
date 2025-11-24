@@ -127,20 +127,10 @@ public class ProductoService {
     }
 
     public List<ProductoRetornoDTO> filtrarProductosPorCategoria(CategoriaEnum categoria) {
-        try {
-            List<ProductoModel> lista_productos_encontrados = productoRepository.findByCategoriaProducto(categoria);
-
-            if (lista_productos_encontrados.isEmpty()) {
-                throw new ListaProductosException("No existen productos con categoria " + categoria.toString().toLowerCase() + " para mostrar");
-            }
-
-            return lista_productos_encontrados.stream()
-                    .map(producto -> mapperProductoRetorno(producto))
-                    .toList();
-
-        } catch (DataAccessException e) {
-            throw new ListaProductosException("Error inesperado al filtrar productos: " + e.getMessage(), e);
-        }
+        List<ProductoModel> lista_productos_encontrados = productoRepository.findByCategoriaProducto(categoria);
+        return lista_productos_encontrados.stream()
+                .map(producto -> mapperProductoRetorno(producto))
+                .toList();
     }
 
     /*

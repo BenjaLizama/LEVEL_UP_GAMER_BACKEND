@@ -88,6 +88,9 @@ public class ProductoController {
     @GetMapping("/filtrar")
     public ResponseEntity<List<ProductoRetornoDTO>> obtenerProductosPorCategoria(@RequestParam CategoriaEnum categoria) {
         List<ProductoRetornoDTO> productos = productoService.filtrarProductosPorCategoria(categoria);
+        if (productos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(productos);
     }
 

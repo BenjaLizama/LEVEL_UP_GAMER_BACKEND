@@ -9,5 +9,6 @@ public class UsuarioRetornoDTO {
     private String nombre;
     private String apellido;
     private String correo;
+    private String imagenPerfilURL;
     private String token;
 }

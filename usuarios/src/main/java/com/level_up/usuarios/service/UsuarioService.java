@@ -114,12 +114,14 @@ public class UsuarioService {
         UsuarioRetornoDTO usuarioRetorno = new UsuarioRetornoDTO();
 
         String jwt = jwtService.generarToken(usuario);
+        String publicURL = getImagenPerfil(usuario);
 
         usuarioRetorno.setIdUsuario(usuario.getIdUsuario());
         usuarioRetorno.setNombreUsuario(usuario.getNombreUsuario());
         usuarioRetorno.setNombre(usuario.getNombre());
         usuarioRetorno.setApellido(usuario.getApellido());
         usuarioRetorno.setCorreo(usuario.getCorreo());
+        usuarioRetorno.setImagenPerfilURL(publicURL);
         usuarioRetorno.setToken(jwt);
 
         return usuarioRetorno;
@@ -226,6 +228,19 @@ public class UsuarioService {
         } catch (IOException e) {
             throw new UsuarioUpdateException("Error al procesar la imagen: " + e.getMessage());
         }
+    }
+
+    public String getImagenPerfil(UsuarioModel usuario) {
+        String rutaLocal = usuario.getImagenPerfilURL();
+
+        if (rutaLocal == null || rutaLocal.isBlank()) {
+            return  null;
+        }
+
+        Path path = Paths.get(rutaLocal);
+        String nombreArchivo = path.getFileName().toString();
+
+        return "/profile-images/" + nombreArchivo;
     }
 
     private String obtenerFormatoImagen(String nombreArchivo) {
