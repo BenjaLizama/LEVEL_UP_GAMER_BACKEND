@@ -50,6 +50,16 @@ public class CarritoController {
         return ResponseEntity.ok(carritoActualizado);
     }
 
+    // ✅ Quitar item del carrito
+    @Operation(summary = "Quita un item del carrito, si solo queda uno elimina el item completo")
+    @ApiResponse(responseCode = "200", description = "1 Item eliminado y carrito recalculado")
+    @ApiResponse(responseCode = "404", description = "Item no encontrado en el carrito")
+    @PutMapping("/{idUsuario}/items/remover/{codigoProducto}")
+    public ResponseEntity<CarritoRetornoDTO> quitarItemDelCarrito(@PathVariable("idUsuario") Long idUsuario, @PathVariable("codigoProducto") String codigoProducto) {
+        CarritoRetornoDTO carritoActualizado = carritoService.quitarItemDelCarrito(idUsuario, codigoProducto);
+        return ResponseEntity.ok(carritoActualizado);
+    }
+
     // ✅ Inicializar carrito
     @Operation(summary = "Inicializa un carrito vacoo para un nuevo usuario (Llamado por MS Usuarios)")
     @ApiResponse(responseCode = "200", description = "Carrito inicializado con exito")

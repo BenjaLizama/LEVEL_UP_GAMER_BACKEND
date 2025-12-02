@@ -87,6 +87,30 @@ public class CarritoService {
         crearNuevoCarrito(idUsuario);
     }
 
+    public CarritoRetornoDTO quitarItemDelCarrito(Long idUsuario, String codigoProducto) {
+        CarritoModel carritoDelUsuario = obtenerCarritoModel(idUsuario);
+
+        ItemCarritoModel itemBuscado = carritoDelUsuario.getItems().stream()
+                .filter(item -> item.getCodigoProducto().equals(codigoProducto))
+                .findFirst()
+                .orElse(null);
+
+        if (itemBuscado == null) {
+            System.out.println("El item no se encuentra en el carrito!");
+            return mapearCarritoADTO(carritoDelUsuario);
+        }
+
+        if (itemBuscado.getCantidad() <= 1) {
+            carritoDelUsuario.getItems().remove(itemBuscado);
+        } else {
+            itemBuscado.setCantidad(itemBuscado.getCantidad() -1);
+        }
+
+        recalcularTotal(carritoDelUsuario);
+        carritoRepository.save(carritoDelUsuario);
+        return mapearCarritoADTO(carritoDelUsuario);
+    }
+
     private ProductoExternoDTO obtenerProductoExterno(String codigoProducto) {
         try {
             return productoFeignClient.obtenerProductoPorCodigo(codigoProducto);
