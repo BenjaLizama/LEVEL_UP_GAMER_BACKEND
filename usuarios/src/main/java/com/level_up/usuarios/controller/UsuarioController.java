@@ -24,6 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Tag(name = "Gestion de usuarios", description = "Endpoints para crear, leer, actualizar y eliminar usuarios")
 public class UsuarioController {
 
+    // Para probar este controlador en Postman hay que poner le token sin comillas dentro del tipo de autenticacion
+    // Bearer Token.
+
     @Autowired
     private UsuarioService usuarioService;
 
@@ -36,18 +39,6 @@ public class UsuarioController {
     public ResponseEntity<UsuarioModel> obtenerUsuario(@PathVariable("id") Long id) {
         UsuarioModel usuarioEncontrado = usuarioService.findById(id);
         return ResponseEntity.ok(usuarioEncontrado);
-    }
-
-    // ✅ Crear usuario
-    @Operation(summary = "Agregar usuario")
-    @ApiResponse(responseCode = "201", description = "Usuario creado con exito")
-    @ApiResponse(responseCode = "409", description = "Conflicto en los campos, violacion de restriccion")
-    @ApiResponse(responseCode = "422", description = "Los datos son validos pero no tienen sentido")
-    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
-    @PostMapping
-    public ResponseEntity<UsuarioModel> agregarUsuario(@Valid @RequestBody AgregarUsuarioDTO agregarUsuarioDTO) {
-        UsuarioModel nuevoUsuario = usuarioService.save(agregarUsuarioDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
     }
 
     // ✅ Actualizar imagen de perfil
@@ -77,17 +68,6 @@ public class UsuarioController {
         dto.setImagenPerfilURL(urlPublica);
 
         return ResponseEntity.ok(dto);
-    }
-
-    // ✅ Iniciar sesion
-    @Operation(summary = "Iniciar sesion como usuario")
-    @ApiResponse(responseCode = "200", description = "Inicio de sesion exitoso")
-    @ApiResponse(responseCode = "401", description = "No se proporcionaron credenciales validas")
-    @ApiResponse(responseCode = "500", description = "Error inesperado o no controlado")
-    @PostMapping("/login")
-    public ResponseEntity<UsuarioRetornoDTO> iniciarSesion(@RequestBody LoginDTO loginDTO, HttpSession session) {
-        UsuarioRetornoDTO usuarioLogeado = usuarioService.iniciarSesion(loginDTO.getCorreo(), loginDTO.getContrasena());
-        return ResponseEntity.ok(usuarioLogeado);
     }
 
     // ✅ Cerrar sesion

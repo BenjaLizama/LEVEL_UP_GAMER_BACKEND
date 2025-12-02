@@ -4,13 +4,18 @@ import com.level_up.usuarios.client.CarritoFeignClient;
 import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
 import com.level_up.usuarios.dto.UsuarioRetornoDTO;
+import com.level_up.usuarios.enums.RolEnum;
 import com.level_up.usuarios.exception.*;
 import com.level_up.usuarios.model.UsuarioModel;
 import com.level_up.usuarios.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,18 +37,17 @@ import java.util.UUID;
 
 @Service
 @Transactional(rollbackOn = Exception.class)
+@RequiredArgsConstructor
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+    private final CarritoFeignClient carritoFeignClient;
+    private final JwtService jwtService;
 
-    @Autowired
-    private CarritoFeignClient carritoFeignClient;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtService jwtService;
-
-    private final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    // private final BCryptPasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     private final long MAX_BYTES = 1_500_000;
 
     public UsuarioModel save(AgregarUsuarioDTO agregarUsuarioDTO) {
@@ -60,13 +64,15 @@ public class UsuarioService {
 
             nuevoUsuario.setCorreo(agregarUsuarioDTO.getCorreo());
 
-            String hash = PASSWORD_ENCODER.encode(agregarUsuarioDTO.getContrasena());
+            String hash = passwordEncoder.encode(agregarUsuarioDTO.getContrasena());
             nuevoUsuario.setContrasena(hash);
 
             nuevoUsuario.setNombreUsuario(agregarUsuarioDTO.getNombreUsuario());
             nuevoUsuario.setNombre(agregarUsuarioDTO.getNombre());
             nuevoUsuario.setApellido(agregarUsuarioDTO.getApellido());
             nuevoUsuario.setFechaNacimiento(agregarUsuarioDTO.getFechaNacimiento());
+
+            nuevoUsuario.setRol(RolEnum.USER.getValue());
 
             UsuarioModel usuarioGuardado = usuarioRepository.save(nuevoUsuario);
 
@@ -98,19 +104,29 @@ public class UsuarioService {
         }
     }
 
-    public UsuarioModel validarCredenciales(String correo, String contrasena) {
-        UsuarioModel usuario = usuarioRepository.findByCorreo(correo)
-                .orElseThrow(() -> new UsuarioNotFoundException("Correo o contraseña incorrectos."));
-
-        if (!PASSWORD_ENCODER.matches(contrasena, usuario.getContrasena())) {
-            throw new UsuarioLoginException("Contraseña incorrecta.");
-        }
-
-        return usuario;
-    }
+//    public UsuarioModel validarCredenciales(String correo, String contrasena) {
+//        UsuarioModel usuario = usuarioRepository.findByCorreo(correo)
+//                .orElseThrow(() -> new UsuarioNotFoundException("Correo o contraseña incorrectos."));
+//
+//        if (!passwordEncoder.matches(contrasena, usuario.getContrasena())) {
+//            throw new UsuarioLoginException("Contraseña incorrecta.");
+//        }
+//
+//        return usuario;
+//    }
 
     public UsuarioRetornoDTO iniciarSesion(String correo, String contrasena) {
-        UsuarioModel usuario = validarCredenciales(correo, contrasena);
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(correo, contrasena)
+            );
+        } catch (Exception e) {
+            throw new UsuarioLoginException("Credenciales invalidas");
+        }
+
+        UsuarioModel usuario = usuarioRepository.findByCorreo(correo)
+                .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado"));
+
         UsuarioRetornoDTO usuarioRetorno = new UsuarioRetornoDTO();
 
         String jwt = jwtService.generarToken(usuario);
@@ -121,6 +137,7 @@ public class UsuarioService {
         usuarioRetorno.setNombre(usuario.getNombre());
         usuarioRetorno.setApellido(usuario.getApellido());
         usuarioRetorno.setCorreo(usuario.getCorreo());
+        usuarioRetorno.setRol(usuario.getRol());
         usuarioRetorno.setImagenPerfilURL(publicURL);
         usuarioRetorno.setToken(jwt);
 
@@ -148,7 +165,7 @@ public class UsuarioService {
                 if (contrasena.contains(" ")) {
                     throw new UsuarioUpdateException("La contraseña no puede contener espacios.");
                 }
-                usuarioEncontrado.setContrasena(PASSWORD_ENCODER.encode(contrasena));
+                usuarioEncontrado.setContrasena(passwordEncoder.encode(contrasena));
             }
 
             if (actualizarUsuarioDTO.getNombreUsuario() != null &&

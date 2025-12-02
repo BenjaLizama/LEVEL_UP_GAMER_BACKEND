@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/enums/RolEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/security/JwtAuthFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/controller/CarritoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/controller/CarritoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/service/CarritoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/service/CarritoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/dto/UsuarioRetornoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/dto/UsuarioRetornoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/model/UsuarioModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/model/UsuarioModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/UsuarioService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +27,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>

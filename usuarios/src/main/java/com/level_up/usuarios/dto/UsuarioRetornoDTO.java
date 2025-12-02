@@ -11,4 +11,5 @@ public class UsuarioRetornoDTO {
     private String correo;
     private String imagenPerfilURL;
     private String token;
+    private String rol;
 }
