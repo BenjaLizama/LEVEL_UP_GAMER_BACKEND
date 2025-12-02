@@ -56,17 +56,27 @@ public class UsuarioController {
     @ApiResponse(responseCode = "400", description = "Se enviaron datos mal formados o invalidos")
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @PutMapping("/{idUsuario}/imagen")
-    public ResponseEntity<UsuarioModel> actualizarImagenPerfil(
-            @PathVariable("idUsuario") Long idUsuario,
-            @RequestParam(value = "imagen", required = false)MultipartFile imagen,
-            @RequestParam(value = "urlImagen", required = false) String urlImagen
+    public ResponseEntity<UsuarioRetornoDTO> actualizarImagenPerfil(
+         @PathVariable("idUsuario") Long idUsuario,
+         @RequestParam(value = "imagen", required = false) MultipartFile imagen,
+         @RequestParam(value = "urlImagen", required = false) String urlImagen
     ) {
         if (imagen == null && (urlImagen == null || urlImagen.isBlank())) {
             throw new UsuarioUpdateException("Debe enviar un archivo o una URL de imagen");
         }
 
         UsuarioModel usuarioActualizado = usuarioService.actualizarImagenPerfil(idUsuario, imagen, urlImagen);
-        return ResponseEntity.ok(usuarioActualizado);
+        String urlPublica = usuarioService.getImagenPerfil(usuarioActualizado);
+        UsuarioRetornoDTO dto = new UsuarioRetornoDTO();
+
+        dto.setIdUsuario(usuarioActualizado.getIdUsuario());
+        dto.setNombreUsuario(usuarioActualizado.getNombreUsuario());
+        dto.setNombre(usuarioActualizado.getNombre());
+        dto.setApellido(usuarioActualizado.getApellido());
+        dto.setCorreo(usuarioActualizado.getCorreo());
+        dto.setImagenPerfilURL(urlPublica);
+
+        return ResponseEntity.ok(dto);
     }
 
     // ✅ Iniciar sesion

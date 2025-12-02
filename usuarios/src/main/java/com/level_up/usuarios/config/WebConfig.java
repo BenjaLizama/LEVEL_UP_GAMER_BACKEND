@@ -13,12 +13,13 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String rutaAbsoulta = new File(RUTA_LOCAL_IMAGENES).getAbsolutePath() + File.separator;
-        String handlerPath = "file:" + rutaAbsoulta;
+        String rutaAbsoluta = new File(RUTA_LOCAL_IMAGENES).getAbsolutePath();
+
+        String handlerPath = "file:/" + rutaAbsoluta.replace(File.separator, "/") + "/";
 
         registry.addResourceHandler(URL_PUBLIC_IMAGENES)
                 .addResourceLocations(handlerPath);
 
-        System.out.println("CONFIGURACION DE IMAGENES: Mapeando URL " + URL_PUBLIC_IMAGENES + " a ruta lcoal: " + handlerPath);
+        System.out.println("CONFIGURACION DE IMAGENES: Mapeando URL " + URL_PUBLIC_IMAGENES + " a ruta local: " + handlerPath);
     }
 }
