@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +20,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/api/usuarios")
 @CrossOrigin
+@RequiredArgsConstructor
+@RequestMapping("/api/usuarios")
 @Tag(name = "Gestion de usuarios", description = "Endpoints para crear, leer, actualizar y eliminar usuarios")
 public class UsuarioController {
 
     // Para probar este controlador en Postman hay que poner le token sin comillas dentro del tipo de autenticacion
     // Bearer Token.
-
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
     // ✅ Obtener usuario
     @Operation(summary = "Obtener usuario por su ID")
@@ -46,7 +46,7 @@ public class UsuarioController {
     @ApiResponse(responseCode = "200", description = "Imagen de perfil actualizada")
     @ApiResponse(responseCode = "400", description = "Se enviaron datos mal formados o invalidos")
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
-    @PutMapping("/{idUsuario}/imagen")
+    @PutMapping("/actualizar/{idUsuario}/imagen")
     public ResponseEntity<UsuarioRetornoDTO> actualizarImagenPerfil(
          @PathVariable("idUsuario") Long idUsuario,
          @RequestParam(value = "imagen", required = false) MultipartFile imagen,
@@ -86,23 +86,12 @@ public class UsuarioController {
     @ApiResponse(responseCode = "404", description = "No se ha encontrado el usuario")
     @ApiResponse(responseCode = "409", description = "Conflicto en los campos, violacion de restriccion")
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
-    @PutMapping("/{idUsuario}")
+    @PutMapping("/actualizar/{idUsuario}")
     public ResponseEntity<UsuarioModel> actualizarInformacionUsuario(
             @PathVariable("idUsuario") Long idUsuario,
             @Valid @RequestBody ActualizarUsuarioDTO actualizarUsuarioDTO
     ) {
         UsuarioModel usuarioActualizado = usuarioService.actualizarInformacionUsuario(idUsuario, actualizarUsuarioDTO);
         return ResponseEntity.ok(usuarioActualizado);
-    }
-
-    // ✅ Eliminar usuario
-    @Operation(summary = "Eliminar usuario")
-    @ApiResponse(responseCode = "204", description = "Usuario eliminado con exito")
-    @ApiResponse(responseCode = "404", description = "No se ha encontrado el usuario")
-    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
-    @DeleteMapping("/{idUsuario}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable("idUsuario") Long idUsuario) {
-        usuarioService.eliminarUsuario(idUsuario);
-        return ResponseEntity.noContent().build();
     }
 }

@@ -11,18 +11,18 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/stripe")
 @CrossOrigin
+@RequiredArgsConstructor
+@RequestMapping("/api/stripe")
 public class PagoController {
 
-    @Autowired
-    private PagoService pagoService;
+    private final PagoService pagoService;
 
     static class CreatePaymentRequest {
         private Long amount;
