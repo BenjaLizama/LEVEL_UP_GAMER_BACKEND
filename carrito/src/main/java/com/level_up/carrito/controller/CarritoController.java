@@ -60,13 +60,4 @@ public class CarritoController {
         return ResponseEntity.ok(carritoActualizado);
     }
 
-    // ✅ Inicializar carrito
-    @Operation(summary = "Inicializa un carrito vacoo para un nuevo usuario (Llamado por MS Usuarios)")
-    @ApiResponse(responseCode = "200", description = "Carrito inicializado con exito")
-    @PostMapping("/{idUsuario}/inicializar")
-    public ResponseEntity<Void> inicializarCarrito(@PathVariable("idUsuario") Long idUsuario) {
-        carritoService.inicializarCarrito(idUsuario);
-        return ResponseEntity.ok().build();
-    }
-
 }
