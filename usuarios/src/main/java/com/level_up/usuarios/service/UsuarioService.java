@@ -10,11 +10,10 @@ import com.level_up.usuarios.model.UsuarioModel;
 import com.level_up.usuarios.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,6 +39,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UsuarioService {
 
+    @Value("${file.upload-dir}")
+    private String uploadDir;
+
     private final UsuarioRepository usuarioRepository;
     private final CarritoFeignClient carritoFeignClient;
     private final JwtService jwtService;
@@ -63,7 +65,6 @@ public class UsuarioService {
             }
 
             nuevoUsuario.setCorreo(agregarUsuarioDTO.getCorreo());
-
             String hash = passwordEncoder.encode(agregarUsuarioDTO.getContrasena());
             nuevoUsuario.setContrasena(hash);
 
@@ -71,7 +72,6 @@ public class UsuarioService {
             nuevoUsuario.setNombre(agregarUsuarioDTO.getNombre());
             nuevoUsuario.setApellido(agregarUsuarioDTO.getApellido());
             nuevoUsuario.setFechaNacimiento(agregarUsuarioDTO.getFechaNacimiento());
-
             nuevoUsuario.setRol(RolEnum.USER.getValue());
 
             UsuarioModel usuarioGuardado = usuarioRepository.save(nuevoUsuario);
@@ -79,11 +79,7 @@ public class UsuarioService {
             try {
                 carritoFeignClient.inicializarCarrito(usuarioGuardado.getIdUsuario());
             } catch (Exception errorFeign) {
-                System.err.println(
-                        "ADVERTENCIA: El usuario " + usuarioGuardado.getIdUsuario() +
-                        "se creo, pero fallo la inicializacion automatica del carrito: " +
-                        errorFeign.getMessage()
-                );
+                System.err.println("ADVERTENCIA: Fallo la inicializacion del carrito: " + errorFeign.getMessage());
             }
 
             return usuarioGuardado;
@@ -96,24 +92,11 @@ public class UsuarioService {
     public UsuarioModel findById(Long id) {
         try {
             return usuarioRepository.findById(id)
-                    .orElseThrow(() ->
-                            new UsuarioNotFoundException("El usuario con el ID: " + id + " no existe."));
-
+                    .orElseThrow(() -> new UsuarioNotFoundException("El usuario con el ID: " + id + " no existe."));
         } catch (DataAccessException e) {
             throw new UsuarioNotFoundException("Error inesperado al buscar al usuario.", e);
         }
     }
-
-//    public UsuarioModel validarCredenciales(String correo, String contrasena) {
-//        UsuarioModel usuario = usuarioRepository.findByCorreo(correo)
-//                .orElseThrow(() -> new UsuarioNotFoundException("Correo o contraseña incorrectos."));
-//
-//        if (!passwordEncoder.matches(contrasena, usuario.getContrasena())) {
-//            throw new UsuarioLoginException("Contraseña incorrecta.");
-//        }
-//
-//        return usuario;
-//    }
 
     public UsuarioRetornoDTO iniciarSesion(String correo, String contrasena) {
         try {
@@ -128,7 +111,6 @@ public class UsuarioService {
                 .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado"));
 
         UsuarioRetornoDTO usuarioRetorno = new UsuarioRetornoDTO();
-
         String jwt = jwtService.generarToken(usuario);
         String publicURL = getImagenPerfil(usuario);
 
@@ -159,12 +141,8 @@ public class UsuarioService {
 
             if (actualizarUsuarioDTO.getContrasena() != null && !actualizarUsuarioDTO.getContrasena().isBlank()) {
                 String contrasena = actualizarUsuarioDTO.getContrasena();
-                if (contrasena.length() < 6) {
-                    throw new UsuarioUpdateException("La contraseña debe tener al menos 6 caracteres.");
-                }
-                if (contrasena.contains(" ")) {
-                    throw new UsuarioUpdateException("La contraseña no puede contener espacios.");
-                }
+                if (contrasena.length() < 6) throw new UsuarioUpdateException("La contraseña debe tener al menos 6 caracteres.");
+                if (contrasena.contains(" ")) throw new UsuarioUpdateException("La contraseña no puede contener espacios.");
                 usuarioEncontrado.setContrasena(passwordEncoder.encode(contrasena));
             }
 
@@ -179,7 +157,6 @@ public class UsuarioService {
             }
 
             return usuarioRepository.save(usuarioEncontrado);
-
         } catch (DataAccessException e) {
             throw new UsuarioUpdateException("Error al actualizar el usuario: " + e.getMessage(), e);
         }
@@ -188,76 +165,90 @@ public class UsuarioService {
     public void eliminarUsuario(Long idUsuario) {
         try {
             UsuarioModel usuario = usuarioRepository.findById(idUsuario)
-                    .orElseThrow(() -> new UsuarioNotFoundException("No se ha encontrado el usuario con ID: " + idUsuario));
-
+                    .orElseThrow(() -> new UsuarioNotFoundException("Usuario no encontrado"));
             usuarioRepository.delete(usuario);
         } catch (DataAccessException e) {
-            throw new UsuarioDeleteException("Error inesperado al eliminar el usuario: " + e.getMessage(), e);
+            throw new UsuarioDeleteException("Error al eliminar usuario: " + e.getMessage(), e);
         }
     }
 
-    public UsuarioModel actualizarImagenPerfil(Long idUsuario, MultipartFile imagen, String urlImagen) {
+    public UsuarioRetornoDTO actualizarImagenPerfilArchivo(Long idUsuario, MultipartFile imagen) {
         UsuarioModel usuario = usuarioRepository.findById(idUsuario)
-                .orElseThrow(() -> new UsuarioUpdateException("No se ha encontrado el usuario con ID: " + idUsuario));
-
-        byte[] imagenBytes;
-        String formato;
+                .orElseThrow(() -> new UsuarioUpdateException("Usuario no encontrado ID: " + idUsuario));
 
         try {
-            String imagenActual = usuario.getImagenPerfilURL();
-
-            if (imagen != null) {
-                // Validar tipo de archivo
-                formato = obtenerFormatoImagen(imagen.getOriginalFilename());
-                imagenBytes = imagen.getBytes();
-            } else {
-                if (urlImagen == null || urlImagen.isBlank()) {
-                    throw new UsuarioUpdateException("Debe enviar una imagen o URL válida.");
-                }
-                URL url = new URL(urlImagen);
-                URLConnection conn = url.openConnection();
-                String contentType = conn.getContentType();
-                if (contentType == null || !contentType.startsWith("image/")) {
-                    throw new UsuarioUpdateException("La URL no apunta a una imagen válida.");
-                }
-                formato = obtenerFormatoImagen(url.getPath());
-                try (InputStream in = conn.getInputStream()) {
-                    imagenBytes = in.readAllBytes();
-                }
+            if (imagen == null || imagen.isEmpty()) {
+                throw new UsuarioUpdateException("El archivo de imagen está vacío");
             }
 
-            // Comprimir/redimensionar segun tipo
-            imagenBytes = comprimirYRedimensionarImagen(imagenBytes, formato);
+            String nombreOriginal = imagen.getOriginalFilename();
+            String formato = obtenerFormatoImagen(nombreOriginal);
 
-            // Eliminar la imagen antigua si existe
-            if (imagenActual != null && !imagenActual.isBlank()) {
-                File archivoAntiguo = new File(imagenActual);
-                if (archivoAntiguo.exists()) {
-                    archivoAntiguo.delete();
-                }
-            }
+            byte[] imagenBytes = comprimirYRedimensionarImagen(imagen.getBytes(), formato);
 
-            // Guardar la imagen en el servidor
+            borrarImagenAnterior(usuario.getImagenPerfilURL());
+
             String rutaImagen = guardarImagen(imagenBytes, formato);
             usuario.setImagenPerfilURL(rutaImagen);
 
-            return usuarioRepository.save(usuario);
+            UsuarioModel usuarioGuardado = usuarioRepository.save(usuario);
+
+            return convertirADTO(usuarioGuardado);
+
         } catch (IOException e) {
-            throw new UsuarioUpdateException("Error al procesar la imagen: " + e.getMessage());
+            throw new UsuarioUpdateException("Error al procesar el archivo: " + e.getMessage());
+        }
+    }
+
+    public UsuarioRetornoDTO actualizarImagenPerfilUrl(Long idUsuario, String urlImagen) {
+        UsuarioModel usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new UsuarioUpdateException("Usuario no encontrado ID: " + idUsuario));
+
+        if (urlImagen == null || urlImagen.isBlank()) {
+            throw new UsuarioUpdateException("La URL es inválida");
+        }
+
+        try {
+            URL url = new URL(urlImagen);
+            URLConnection conn = url.openConnection();
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+            String contentType = conn.getContentType();
+            if (contentType != null && !contentType.startsWith("image/")) {
+                // System.out.println("Warning: Content-Type no es imagen (" + contentType + ")");
+            }
+
+            String formato = obtenerFormatoImagen(url.getPath());
+            byte[] imagenBytes;
+            try (InputStream in = conn.getInputStream()) {
+                imagenBytes = in.readAllBytes();
+            }
+
+            imagenBytes = comprimirYRedimensionarImagen(imagenBytes, formato);
+
+            borrarImagenAnterior(usuario.getImagenPerfilURL());
+            String rutaImagen = guardarImagen(imagenBytes, formato);
+            usuario.setImagenPerfilURL(rutaImagen);
+
+            UsuarioModel usuarioGuardado = usuarioRepository.save(usuario);
+
+            return convertirADTO(usuarioGuardado);
+
+        } catch (IOException e) {
+            throw new UsuarioUpdateException("Error al descargar la imagen: " + e.getMessage());
         }
     }
 
     public String getImagenPerfil(UsuarioModel usuario) {
         String rutaLocal = usuario.getImagenPerfilURL();
-
         if (rutaLocal == null || rutaLocal.isBlank()) {
-            return  null;
+            return null;
         }
 
         Path path = Paths.get(rutaLocal);
         String nombreArchivo = path.getFileName().toString();
 
-        return "/profile-images/" + nombreArchivo;
+        return "/uploads/" + nombreArchivo;
     }
 
     private String obtenerFormatoImagen(String nombreArchivo) {
@@ -265,24 +256,38 @@ public class UsuarioService {
             return "jpg";
         }
         String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1).toLowerCase();
+        if (extension.contains("?")) {
+            extension = extension.split("\\?")[0];
+        }
         switch (extension) {
-            case "png":
-                return "png";
-            case "webp":
-                return "webp";
+            case "png": return "png";
+            case "webp": return "webp";
             case "jpg":
             case "jpeg":
-            default:
-                return "jpg";
+            default: return "jpg";
         }
     }
 
     private String guardarImagen(byte[] imagenBytes, String formato) throws IOException {
         String nombreArchivo = UUID.randomUUID() + "." + formato;
-        Path ruta = Paths.get("uploads/" + nombreArchivo);
-        Files.createDirectories(ruta.getParent());
-        Files.write(ruta, imagenBytes);
-        return ruta.toString();
+
+        Path rutaBase = Paths.get(uploadDir);
+        Path rutaCompleta = rutaBase.resolve(nombreArchivo);
+
+        Files.createDirectories(rutaCompleta.getParent());
+
+        Files.write(rutaCompleta, imagenBytes);
+
+        return rutaCompleta.toString();
+    }
+
+    private void borrarImagenAnterior(String rutaActual) {
+        if (rutaActual != null && !rutaActual.isBlank()) {
+            File archivoAntiguo = new File(rutaActual);
+            if (archivoAntiguo.exists()) {
+                archivoAntiguo.delete();
+            }
+        }
     }
 
     private byte[] comprimirYRedimensionarImagen(byte[] original, String formato) throws IOException {
@@ -309,7 +314,7 @@ public class UsuarioService {
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(formato);
-        if (!writers.hasNext()) throw new UsuarioUpdateException("No hay escritor de imágenes disponible para formato: " + formato);
+        if (!writers.hasNext()) throw new UsuarioUpdateException("No hay escritor disponible para formato: " + formato);
         ImageWriter writer = writers.next();
         ImageWriteParam param = writer.getDefaultWriteParam();
 
@@ -369,8 +374,17 @@ public class UsuarioService {
                 }
             }
         }
-
         return bytesFinales;
     }
 
+    private UsuarioRetornoDTO convertirADTO(UsuarioModel usuario) {
+        UsuarioRetornoDTO dto = new UsuarioRetornoDTO();
+        dto.setIdUsuario(usuario.getIdUsuario());
+        dto.setNombreUsuario(usuario.getNombreUsuario());
+        dto.setNombre(usuario.getNombre());
+        dto.setApellido(usuario.getApellido());
+        dto.setCorreo(usuario.getCorreo());
+        dto.setImagenPerfilURL(getImagenPerfil(usuario));
+        return dto;
+    }
 }

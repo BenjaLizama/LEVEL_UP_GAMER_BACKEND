@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("api/admin/usuarios")
 @Tag(name = "Administracion de usuarios", description = "Endpoints para la gestion de usuarios de los administradores.")
