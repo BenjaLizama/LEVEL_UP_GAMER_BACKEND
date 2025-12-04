@@ -5,17 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/security/JwtAuthFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/service/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/config/DataInitializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/AdminUsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/AdminUsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/PagoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/PagoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/productos/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/UsuarioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,25 +41,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.CarritoApp.executor": "Run",
-    "Application.ProductosApp.executor": "Run",
-    "Application.UsuariosApp.executor": "Run",
-    "Maven.usuarios [clean].executor": "Run",
-    "Maven.usuarios [deploy].executor": "Run",
-    "Maven.usuarios [install].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CarritoApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ProductosApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UsuariosApp.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.usuarios [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.usuarios [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.usuarios [install].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Compound.App">
     <configuration name="CarritoApp" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.CarritoApplication" />

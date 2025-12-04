@@ -31,6 +31,7 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.UUID;
 
@@ -249,6 +250,35 @@ public class UsuarioService {
         String nombreArchivo = path.getFileName().toString();
 
         return "/uploads/" + nombreArchivo;
+    }
+
+    public UsuarioModel saveAdmin(AgregarUsuarioDTO adminDTO) {
+        if (usuarioRepository.existsByCorreo(adminDTO.getCorreo())) {
+            return usuarioRepository.findByCorreo(adminDTO.getCorreo()).orElse(null);
+        }
+
+        UsuarioModel nuevoAdmin = new UsuarioModel();
+
+        String hash = passwordEncoder.encode(adminDTO.getContrasena());
+        nuevoAdmin.setContrasena(hash);
+
+        nuevoAdmin.setNombreUsuario(adminDTO.getNombreUsuario());
+        nuevoAdmin.setNombre(adminDTO.getNombre());
+        nuevoAdmin.setApellido(adminDTO.getApellido());
+        nuevoAdmin.setCorreo(adminDTO.getCorreo());
+        nuevoAdmin.setFechaNacimiento(LocalDate.of(2000, 1, 1));
+
+        nuevoAdmin.setRol(RolEnum.ADMIN.getValue());
+
+        UsuarioModel adminGuardado = usuarioRepository.save(nuevoAdmin);
+
+        try {
+            carritoFeignClient.inicializarCarrito(adminGuardado.getIdUsuario());
+        } catch (Exception e) {
+            System.err.println("Advertencia al crear carrito admin: " + e.getMessage());
+        }
+
+        return adminGuardado;
     }
 
     private String obtenerFormatoImagen(String nombreArchivo) {

@@ -18,14 +18,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/productos")
-@CrossOrigin
 @Tag(name = "Gestion de productos", description = "Endpoints para gestionar los productos")
 public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
 
-    // ✅ Agregar producto
+    // 🔒 Agregar producto
     @Operation(summary = "Agregar producto")
     @ApiResponse(responseCode = "201", description = "Se creo el recurso")
     @ApiResponse(responseCode = "409", description = "Conflicto al intentar crear el recurso")
@@ -36,7 +35,7 @@ public class ProductoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(producto);
     }
 
-    // ✅ Eliminar producto
+    // 🔒 Eliminar producto
     @ApiResponse(responseCode = "201", description = "Se creo el recurso")
     @ApiResponse(responseCode = "409", description = "Conflicto al intentar eliminar el recurso")
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
