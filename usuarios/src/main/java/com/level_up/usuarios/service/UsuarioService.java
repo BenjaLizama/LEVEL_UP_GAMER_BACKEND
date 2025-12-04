@@ -3,6 +3,7 @@ package com.level_up.usuarios.service;
 import com.level_up.usuarios.client.CarritoFeignClient;
 import com.level_up.usuarios.dto.ActualizarUsuarioDTO;
 import com.level_up.usuarios.dto.AgregarUsuarioDTO;
+import com.level_up.usuarios.dto.TotalCarritoDTO;
 import com.level_up.usuarios.dto.UsuarioRetornoDTO;
 import com.level_up.usuarios.enums.RolEnum;
 import com.level_up.usuarios.exception.*;
@@ -279,6 +280,16 @@ public class UsuarioService {
         }
 
         return adminGuardado;
+    }
+
+    public Double obtenerTotalCarrito(Long idUsuario) {
+        TotalCarritoDTO carritoDTO = carritoFeignClient.obtenerTotalCarrito(idUsuario);
+
+        if (carritoDTO != null && carritoDTO.getTotal() != null) {
+            return carritoDTO.getTotal();
+        }
+
+        return 0.0;
     }
 
     private String obtenerFormatoImagen(String nombreArchivo) {

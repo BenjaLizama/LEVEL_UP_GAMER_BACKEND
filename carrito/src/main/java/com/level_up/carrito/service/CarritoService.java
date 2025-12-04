@@ -164,4 +164,9 @@ public class CarritoService {
 
         return dto;
     }
+
+    public void vaciarCarrito(Long idUsuario) {
+        CarritoModel carritoDelUsuario = obtenerCarritoModel(idUsuario);
+        carritoDelUsuario.getItems().clear();
+    }
 }
