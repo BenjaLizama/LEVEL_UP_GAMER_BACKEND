@@ -172,6 +172,8 @@ public class ProductoService {
             producto.getStock().setCantidad(productoDTO.getCantidadInicial());
         }
 
+
+
         productoRepository.save(producto);
 
         return mapperProductoRetorno(producto);
@@ -192,6 +194,7 @@ public class ProductoService {
         productoRetorno.setPrecioProducto(producto.getPrecioProducto());
         productoRetorno.setImagenesUrl(producto.getImagenesUrl());
         productoRetorno.setCantidadStockProducto(producto.getStock().getCantidad());
+        productoRetorno.setCategoria(producto.getCategoriaProducto().toString());
 
         return productoRetorno;
     }

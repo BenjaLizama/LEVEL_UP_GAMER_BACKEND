@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/security/JwtAuthFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/service/JwtService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/config/DataInitializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productos/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/productos/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productos/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/UsuarioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/service/UsuarioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/security/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/security/JwtAuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/dto/ProductoRetornoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/dto/ProductoRetornoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/service/ProductoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/service/ProductoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

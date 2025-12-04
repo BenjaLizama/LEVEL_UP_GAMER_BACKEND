@@ -33,7 +33,7 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // TUS RUTAS PROTEGIDAS
-                        .requestMatchers("/api/carritos/**").hasAuthority("USER")
+                        .requestMatchers("/api/carritos/**").hasAnyRole("USER", "ADMIN")
 
                         // EL RESTO CERRADO
                         .anyRequest().authenticated()

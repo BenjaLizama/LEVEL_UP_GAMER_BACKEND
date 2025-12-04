@@ -10,6 +10,11 @@ public class ProductoRetornoDTO {
     private String nombreProducto;
     private String descripcionProducto;
     private Double precioProducto;
+    private String categoria;
     private List<String> imagenesUrl;
     private Integer cantidadStockProducto;
+
+    public String getCategoria() {
+        return categoria.replace("_", " ");
+    }
 }
