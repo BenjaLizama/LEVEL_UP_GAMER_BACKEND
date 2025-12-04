@@ -168,5 +168,6 @@ public class CarritoService {
     public void vaciarCarrito(Long idUsuario) {
         CarritoModel carritoDelUsuario = obtenerCarritoModel(idUsuario);
         carritoDelUsuario.getItems().clear();
+        recalcularTotal(carritoDelUsuario);
     }
 }
