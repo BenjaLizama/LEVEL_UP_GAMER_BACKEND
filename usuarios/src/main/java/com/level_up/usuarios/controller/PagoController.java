@@ -10,6 +10,9 @@ import com.stripe.model.Event;
 import com.stripe.model.checkout.Session;
 
 import com.stripe.net.Webhook;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +24,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/stripe")
+@Tag(name = "Gestor de pagos", description = "Endpoints utilizados para gestionar los pagos")
 public class PagoController {
 
     private final PagoService pagoService;
     private final UsuarioRepository usuarioRepository;
 
-    // 1. Modificamos el DTO: Ya no necesitamos recibir 'amount' desde el frontend
     static class CreatePaymentRequest {
-        // Puedes dejarlo vacío o agregar otros campos si necesitas (ej. dirección)
-        // Por ahora no necesitamos nada del cuerpo si el token trae la identidad.
+
     }
 
     static class CreatePaymentResponse {
@@ -39,12 +41,14 @@ public class PagoController {
         public String getUrl() { return url; }
     }
 
+    @Operation(summary = "Realizar pago en base al carrito del usuario")
+    @ApiResponse(responseCode = "200", description = "Link de pago generado con exito")
+    @ApiResponse(responseCode = "400", description = "Error al realizar el pago")
+    @ApiResponse(responseCode = "403", description = "Usuario sin roles suficientes para realizar la operacion")
+    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
     @PostMapping("/pagar")
-    public ResponseEntity<?> createPaymentSession(/* @RequestBody CreatePaymentRequest request */) {
-        // Nota: Si no envías nada en el body desde frontend, puedes quitar @RequestBody
+    public ResponseEntity<?> createPaymentSession() {
         try {
-            // 2. ELIMINADO: Ya no validamos request.getAmount() porque no confiamos en el front.
-
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication == null || !authentication.isAuthenticated()) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No autorizado");
@@ -66,29 +70,11 @@ public class PagoController {
         }
     }
 
-    @PostMapping("/webhook")
-    public ResponseEntity<String> handleStripeWebhook(@RequestBody String payload, @RequestHeader("Stripe-Signature") String sigHeader) {
-        Event event;
-        try {
-            event = Webhook.constructEvent(payload, sigHeader, "TU_CLAVE_SECRETA_DE_WEBHOOK");
-        } catch (SignatureVerificationException e) {
-            // Firma inválida
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Firma inválida");
-        }
-
-        if ("checkout.session.completed".equals(event.getType())) {
-            Session session = (Session) event.getDataObjectDeserializer().getObject().orElse(null);
-
-            if (session != null) {
-                String customerId = session.getCustomer();
-
-                pagoService.finalizarCompra(customerId);
-            }
-        }
-
-        return ResponseEntity.ok("Recibido");
-    }
-
+    @Operation(summary = "Confirmar pago")
+    @ApiResponse(responseCode = "200", description = "Confirmacion de pago realizada con exito")
+    @ApiResponse(responseCode = "400", description = "Error al realizar confirmacion de pago")
+    @ApiResponse(responseCode = "403", description = "Usuario sin roles suficientes para realizar la operacion")
+    @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     @GetMapping("/confirmar-pago")
     public ResponseEntity<?> confirmarPago(@RequestParam("session_id") String sessionId) {
         try {

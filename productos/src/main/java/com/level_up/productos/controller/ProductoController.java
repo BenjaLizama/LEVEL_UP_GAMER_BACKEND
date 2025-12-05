@@ -26,7 +26,7 @@ public class ProductoController {
     private ProductoService productoService;
 
     // 🔒 Agregar producto
-    @Operation(summary = "Agregar producto")
+    @Operation(summary = "🔒 Agregar producto")
     @ApiResponse(responseCode = "201", description = "Se creo el recurso")
     @ApiResponse(responseCode = "409", description = "Conflicto al intentar crear el recurso")
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
@@ -38,6 +38,7 @@ public class ProductoController {
     }
 
     // 🔒 Eliminar producto
+    @Operation(summary = "🔒 Eliminar producto")
     @ApiResponse(responseCode = "204", description = "Se elimino el recurso")
     @ApiResponse(responseCode = "409", description = "Conflicto al intentar eliminar el recurso")
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")

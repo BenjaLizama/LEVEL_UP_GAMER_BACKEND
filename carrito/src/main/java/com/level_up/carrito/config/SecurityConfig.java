@@ -29,19 +29,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configure(http))
                 .authorizeHttpRequests(auth -> auth
-
-                        // 1. REGLAS PERMITIDAS (DEBEN IR PRIMERO)
-
-                        // 🔑 SOLUCIÓN: Especificamos explícitamente el método PUT
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/carritos/*/vaciar").permitAll()
-
-                        // Mantenemos esta por si acaso, aunque la de arriba es la que falla.
                         .requestMatchers("/api/public/**").permitAll()
-
-                        // 2. REGLA PROTEGIDA POR ROLES (VA DESPUÉS)
                         .requestMatchers("/api/carritos/**").hasAnyRole("USER", "ADMIN")
-
-                        // 3. Todo lo demás requiere autenticación
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess

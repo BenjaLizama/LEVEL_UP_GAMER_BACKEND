@@ -39,6 +39,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+        <!-- OpenAPI -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+
         <!-- Validator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
