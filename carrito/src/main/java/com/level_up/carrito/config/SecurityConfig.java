@@ -4,6 +4,7 @@ import com.level_up.carrito.security.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -28,14 +29,19 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configure(http))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/public/**"
-                        ).permitAll()
 
-                        // TUS RUTAS PROTEGIDAS
+                        // 1. REGLAS PERMITIDAS (DEBEN IR PRIMERO)
+
+                        // 🔑 SOLUCIÓN: Especificamos explícitamente el método PUT
+                        .requestMatchers(HttpMethod.PUT, "/api/carritos/*/vaciar").permitAll()
+
+                        // Mantenemos esta por si acaso, aunque la de arriba es la que falla.
+                        .requestMatchers("/api/public/**").permitAll()
+
+                        // 2. REGLA PROTEGIDA POR ROLES (VA DESPUÉS)
                         .requestMatchers("/api/carritos/**").hasAnyRole("USER", "ADMIN")
 
-                        // EL RESTO CERRADO
+                        // 3. Todo lo demás requiere autenticación
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess

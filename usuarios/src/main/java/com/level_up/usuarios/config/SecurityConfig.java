@@ -34,6 +34,7 @@ public class SecurityConfig {
                     .requestMatchers("/uploads/**").permitAll()
                     .requestMatchers("/api/admin/**").hasRole("ADMIN")
                     .requestMatchers("/api/productos/**").hasAnyRole("ADMIN", "USER")
+                    .requestMatchers("/api/stripe/**").authenticated()
                     .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess

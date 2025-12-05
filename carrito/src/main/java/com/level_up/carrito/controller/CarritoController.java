@@ -60,4 +60,13 @@ public class CarritoController {
         return ResponseEntity.ok(carritoActualizado);
     }
 
+    // ✅ Vaciar carrito
+    @Operation(summary = "Vacia el carrito del usuario")
+    @ApiResponse(responseCode = "200", description = "El carrito se vacio correctamente")
+    @ApiResponse(responseCode = "404", description = "No se encontro el carrito del usuario")
+    @PutMapping("/{idUsuario}/vaciar")
+    public ResponseEntity<String> vaciarCarritoDelUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        carritoService.vaciarCarrito(idUsuario);
+        return ResponseEntity.ok("Se ha vaciado el carrito del usuario " + idUsuario);
+    }
 }
