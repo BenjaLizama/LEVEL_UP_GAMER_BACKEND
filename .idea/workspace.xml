@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/security/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/main/java/com/level_up/carrito/security/JwtAuthFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/dto/ProductoRetornoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/dto/ProductoRetornoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/service/ProductoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/service/ProductoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/productos/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,12 +21,25 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;n3k0k4w4&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/BenjaLizama/LEVEL_UP_GAMER_BACKEND.git&quot;,
+    &quot;accountId&quot;: &quot;0bf2ea88-9a06-41fd-8aad-4cc35f70bcbf&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -37,26 +49,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.CarritoApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ProductosApp.executor&quot;: &quot;Run&quot;,
-    &quot;Application.UsuariosApp.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.usuarios [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.usuarios [deploy].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.usuarios [install].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CarritoApp.executor": "Run",
+    "Application.ProductosApp.executor": "Run",
+    "Application.UsuariosApp.executor": "Run",
+    "JUnit.ProductoControllerTest.agregarProducto.executor": "Run",
+    "JUnit.ProductoControllerTest.agregarProducto_SinUser.executor": "Debug",
+    "JUnit.ProductoControllerTest.agregarProducto_User.executor": "Run",
+    "JUnit.ProductoControllerTest.eliminarProducto.executor": "Run",
+    "JUnit.ProductoControllerTest.eliminarProducto_Admin.executor": "Run",
+    "JUnit.ProductoControllerTest.eliminarProducto_ConUser.executor": "Run",
+    "JUnit.ProductoControllerTest.executor": "Run",
+    "JUnit.ProductoControllerTest.obtenerTodosLosProductos.executor": "Run",
+    "JUnit.ProductoServiceTest.actualizarProducto.executor": "Run",
+    "JUnit.ProductoServiceTest.agregarProducto.executor": "Run",
+    "JUnit.ProductoServiceTest.eliminarProducto.executor": "Run",
+    "JUnit.ProductoServiceTest.executor": "Run",
+    "JUnit.ProductoServiceTest.existsById.executor": "Run",
+    "JUnit.ProductoServiceTest.filtrarProductosPorCategoria.executor": "Run",
+    "JUnit.ProductoServiceTest.findAll.executor": "Run",
+    "JUnit.ProductoServiceTest.findByCodigoProducto.executor": "Run",
+    "JUnit.ProductoServiceTest.findById.executor": "Run",
+    "Maven.usuarios [clean].executor": "Run",
+    "Maven.usuarios [deploy].executor": "Run",
+    "Maven.usuarios [install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/steamreculiao/Documents/Level_up_backend/LEVEL_UP_GAMER_BACKEND",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
-  <component name="RunManager" selected="Compound.App">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.level_up.productos.controller" />
+      <recent name="com.level_up.productos.service" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ProductoControllerTest">
     <configuration name="CarritoApp" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.CarritoApplication" />
       <module name="carrito" />
@@ -84,12 +126,105 @@
       <toRun name="UsuariosApp" type="Application" />
       <method v="2" />
     </configuration>
+    <configuration name="ProductoControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="productos" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.level_up.productos.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.level_up.productos.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.controller.ProductoControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductoControllerTest.agregarProducto_SinUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="productos" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.level_up.productos.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.level_up.productos.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.controller.ProductoControllerTest" />
+      <option name="METHOD_NAME" value="agregarProducto_SinUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductoControllerTest.eliminarProducto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="productos" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.level_up.productos.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.level_up.productos.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.controller.ProductoControllerTest" />
+      <option name="METHOD_NAME" value="eliminarProducto" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductoControllerTest.eliminarProducto_Admin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="productos" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.level_up.productos.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.level_up.productos.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.controller.ProductoControllerTest" />
+      <option name="METHOD_NAME" value="eliminarProducto_Admin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductoControllerTest.eliminarProducto_ConUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="productos" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.level_up.productos.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.level_up.productos.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.controller.ProductoControllerTest" />
+      <option name="METHOD_NAME" value="eliminarProducto_ConUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.CarritoApp" />
       <item itemvalue="Application.ProductosApp" />
       <item itemvalue="Application.UsuariosApp" />
       <item itemvalue="Compound.App" />
+      <item itemvalue="JUnit.ProductoControllerTest" />
+      <item itemvalue="JUnit.ProductoControllerTest.agregarProducto_SinUser" />
+      <item itemvalue="JUnit.ProductoControllerTest.eliminarProducto" />
+      <item itemvalue="JUnit.ProductoControllerTest.eliminarProducto_Admin" />
+      <item itemvalue="JUnit.ProductoControllerTest.eliminarProducto_ConUser" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ProductoControllerTest" />
+        <item itemvalue="JUnit.ProductoControllerTest.agregarProducto_SinUser" />
+        <item itemvalue="JUnit.ProductoControllerTest.eliminarProducto_ConUser" />
+        <item itemvalue="JUnit.ProductoControllerTest.eliminarProducto_Admin" />
+        <item itemvalue="JUnit.ProductoControllerTest.eliminarProducto" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
