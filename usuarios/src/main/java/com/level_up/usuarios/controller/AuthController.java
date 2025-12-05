@@ -29,7 +29,7 @@ public class AuthController {
     @ApiResponse(responseCode = "409", description = "Conflicto en los campos, violacion de restriccion")
     @ApiResponse(responseCode = "422", description = "Los datos son validos pero no tienen sentido")
     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<UsuarioModel> agregarUsuario(@Valid @RequestBody AgregarUsuarioDTO agregarUsuarioDTO) {
         UsuarioModel nuevoUsuario = usuarioService.save(agregarUsuarioDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
