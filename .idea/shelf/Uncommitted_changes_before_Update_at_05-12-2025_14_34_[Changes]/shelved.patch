@@ -1,0 +1,339 @@
+Index: productos/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>com.level_up</groupId>\r\n        <artifactId>microservicios</artifactId>\r\n        <version>1.0.0</version>\r\n        <relativePath>../pom.xml</relativePath>\r\n    </parent>\r\n    <artifactId>productos</artifactId>\r\n    <version>0.0.1-SNAPSHOT</version>\r\n    <name>productos</name>\r\n    <description>Demo project for Spring Boot</description>\r\n    <url/>\r\n    <licenses>\r\n        <license/>\r\n    </licenses>\r\n    <developers>\r\n        <developer/>\r\n    </developers>\r\n    <scm>\r\n        <connection/>\r\n        <developerConnection/>\r\n        <tag/>\r\n        <url/>\r\n    </scm>\r\n    <properties>\r\n        <java.version>17</java.version>\r\n    </properties>\r\n    <dependencies>\r\n\r\n        <dependency>\r\n            <groupId>com.fasterxml.jackson.core</groupId>\r\n            <artifactId>jackson-databind</artifactId>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework.security</groupId>\r\n            <artifactId>spring-security-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-data-jpa</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-web</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Validator -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-validation</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Swagger -->\r\n        <dependency>\r\n            <groupId>org.springdoc</groupId>\r\n            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-security</artifactId>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-api</artifactId>\r\n            <version>0.11.5</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-impl</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-jackson</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>com.h2database</groupId>\r\n            <artifactId>h2</artifactId>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.projectlombok</groupId>\r\n            <artifactId>lombok</artifactId>\r\n            <optional>true</optional>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-test</artifactId>\r\n            <scope>test</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n    <build>\r\n        <plugins>\r\n            <plugin>\r\n                <groupId>org.apache.maven.plugins</groupId>\r\n                <artifactId>maven-compiler-plugin</artifactId>\r\n                <configuration>\r\n                    <annotationProcessorPaths>\r\n                        <path>\r\n                            <groupId>org.projectlombok</groupId>\r\n                            <artifactId>lombok</artifactId>\r\n                        </path>\r\n                    </annotationProcessorPaths>\r\n                </configuration>\r\n            </plugin>\r\n            <plugin>\r\n                <groupId>org.springframework.boot</groupId>\r\n                <artifactId>spring-boot-maven-plugin</artifactId>\r\n                <configuration>\r\n                    <excludes>\r\n                        <exclude>\r\n                            <groupId>org.projectlombok</groupId>\r\n                            <artifactId>lombok</artifactId>\r\n                        </exclude>\r\n                    </excludes>\r\n                </configuration>\r\n            </plugin>\r\n        </plugins>\r\n    </build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/productos/pom.xml b/productos/pom.xml
+--- a/productos/pom.xml	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/productos/pom.xml	(date 1764955969944)
+@@ -56,7 +56,7 @@
+             <artifactId>spring-boot-starter-validation</artifactId>
+         </dependency>
+ 
+-        <!-- Swagger -->
++        <!-- OpenAPI -->
+         <dependency>
+             <groupId>org.springdoc</groupId>
+             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+Index: usuarios/src/main/java/com/level_up/usuarios/controller/AdminUsuarioController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.level_up.usuarios.controller;\r\n\r\nimport com.level_up.usuarios.service.UsuarioService;\r\nimport io.swagger.v3.oas.annotations.Operation;\r\nimport io.swagger.v3.oas.annotations.responses.ApiResponse;\r\nimport io.swagger.v3.oas.annotations.tags.Tag;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\n@CrossOrigin\r\n@RestController\r\n@RequiredArgsConstructor\r\n@RequestMapping(\"api/admin/usuarios\")\r\n@Tag(name = \"Administracion de usuarios\", description = \"Endpoints para la gestion de usuarios de los administradores.\")\r\npublic class AdminUsuarioController {\r\n\r\n    private final UsuarioService usuarioService;\r\n\r\n    // ✅ Eliminar usuario\r\n    @Operation(summary = \"Eliminar usuario\")\r\n    @ApiResponse(responseCode = \"204\", description = \"Usuario eliminado con exito\")\r\n    @ApiResponse(responseCode = \"404\", description = \"No se ha encontrado el usuario\")\r\n    @ApiResponse(responseCode = \"500\", description = \"Error inesperado no controlado\")\r\n    @DeleteMapping(\"/eliminar/{idUsuario}\")\r\n    public ResponseEntity<Void> eliminarUsuario(@PathVariable(\"idUsuario\") Long idUsuario) {\r\n        usuarioService.eliminarUsuario(idUsuario);\r\n        return ResponseEntity.noContent().build();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/usuarios/src/main/java/com/level_up/usuarios/controller/AdminUsuarioController.java b/usuarios/src/main/java/com/level_up/usuarios/controller/AdminUsuarioController.java
+--- a/usuarios/src/main/java/com/level_up/usuarios/controller/AdminUsuarioController.java	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/usuarios/src/main/java/com/level_up/usuarios/controller/AdminUsuarioController.java	(date 1764955969948)
+@@ -1,5 +1,8 @@
+ package com.level_up.usuarios.controller;
+ 
++import com.level_up.usuarios.dto.AgregarUsuarioDTO;
++import com.level_up.usuarios.dto.UsuarioRetornoDTO;
++import com.level_up.usuarios.model.UsuarioModel;
+ import com.level_up.usuarios.service.UsuarioService;
+ import io.swagger.v3.oas.annotations.Operation;
+ import io.swagger.v3.oas.annotations.responses.ApiResponse;
+@@ -20,6 +23,7 @@
+     // ✅ Eliminar usuario
+     @Operation(summary = "Eliminar usuario")
+     @ApiResponse(responseCode = "204", description = "Usuario eliminado con exito")
++    @ApiResponse(responseCode = "403", description = "No hay autorizacion para realizar operacion")
+     @ApiResponse(responseCode = "404", description = "No se ha encontrado el usuario")
+     @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
+     @DeleteMapping("/eliminar/{idUsuario}")
+@@ -27,4 +31,16 @@
+         usuarioService.eliminarUsuario(idUsuario);
+         return ResponseEntity.noContent().build();
+     }
++
++    // ✅ Agregar usuario administrador
++    @Operation(summary = "Agregar usuario administrador")
++    @ApiResponse(responseCode = "201", description = "Usuario creado con exito")
++    @ApiResponse(responseCode = "400", description = "Error al crear el usuario")
++    @ApiResponse(responseCode = "403", description = "No hay autorizacion para realizar operacion")
++    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
++    @PostMapping("/agregar")
++    public ResponseEntity<UsuarioModel> agregarUsuarioAdministrador(@RequestBody AgregarUsuarioDTO usuario) {
++        UsuarioModel nuevoAdmin = usuarioService.saveAdmin(usuario);
++        return ResponseEntity.ok(nuevoAdmin);
++    }
+ }
+Index: usuarios/src/main/java/com/level_up/usuarios/controller/PagoController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.level_up.usuarios.controller;\r\n\r\nimport com.level_up.usuarios.exception.UsuarioNotFoundException;\r\nimport com.level_up.usuarios.model.UsuarioModel;\r\nimport com.level_up.usuarios.repository.UsuarioRepository;\r\nimport com.level_up.usuarios.service.PagoService;\r\nimport com.stripe.exception.SignatureVerificationException;\r\nimport com.stripe.exception.StripeException;\r\nimport com.stripe.model.Event;\r\nimport com.stripe.model.checkout.Session;\r\n\r\nimport com.stripe.net.Webhook;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.security.core.Authentication;\r\nimport org.springframework.security.core.context.SecurityContextHolder;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\n@CrossOrigin\r\n@RestController\r\n@RequiredArgsConstructor\r\n@RequestMapping(\"/api/stripe\")\r\npublic class PagoController {\r\n\r\n    private final PagoService pagoService;\r\n    private final UsuarioRepository usuarioRepository;\r\n\r\n    // 1. Modificamos el DTO: Ya no necesitamos recibir 'amount' desde el frontend\r\n    static class CreatePaymentRequest {\r\n        // Puedes dejarlo vacío o agregar otros campos si necesitas (ej. dirección)\r\n        // Por ahora no necesitamos nada del cuerpo si el token trae la identidad.\r\n    }\r\n\r\n    static class CreatePaymentResponse {\r\n        private String url;\r\n\r\n        public CreatePaymentResponse(String url) { this.url = url; }\r\n        public String getUrl() { return url; }\r\n    }\r\n\r\n    @PostMapping(\"/pagar\")\r\n    public ResponseEntity<?> createPaymentSession(/* @RequestBody CreatePaymentRequest request */) {\r\n        // Nota: Si no envías nada en el body desde frontend, puedes quitar @RequestBody\r\n        try {\r\n            // 2. ELIMINADO: Ya no validamos request.getAmount() porque no confiamos en el front.\r\n\r\n            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();\r\n            if (authentication == null || !authentication.isAuthenticated()) {\r\n                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(\"No autorizado\");\r\n            }\r\n\r\n            String correo = authentication.getName();\r\n            UsuarioModel usuario = usuarioRepository.findByCorreo(correo)\r\n                    .orElseThrow(() -> new UsuarioNotFoundException(\"Usuario no encontrado\"));\r\n\r\n            Session session = pagoService.crearSessionDePago(usuario.getIdUsuario());\r\n\r\n            CreatePaymentResponse response = new CreatePaymentResponse(session.getUrl());\r\n            return new ResponseEntity<>(response, HttpStatus.CREATED);\r\n\r\n        } catch (StripeException e) {\r\n            return new ResponseEntity<>(\"Error Stripe: \" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);\r\n        } catch (Exception e) {\r\n            return new ResponseEntity<>(\"Error: \" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);\r\n        }\r\n    }\r\n\r\n    @PostMapping(\"/webhook\")\r\n    public ResponseEntity<String> handleStripeWebhook(@RequestBody String payload, @RequestHeader(\"Stripe-Signature\") String sigHeader) {\r\n        Event event;\r\n        try {\r\n            event = Webhook.constructEvent(payload, sigHeader, \"TU_CLAVE_SECRETA_DE_WEBHOOK\");\r\n        } catch (SignatureVerificationException e) {\r\n            // Firma inválida\r\n            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(\"Firma inválida\");\r\n        }\r\n\r\n        if (\"checkout.session.completed\".equals(event.getType())) {\r\n            Session session = (Session) event.getDataObjectDeserializer().getObject().orElse(null);\r\n\r\n            if (session != null) {\r\n                String customerId = session.getCustomer();\r\n\r\n                pagoService.finalizarCompra(customerId);\r\n            }\r\n        }\r\n\r\n        return ResponseEntity.ok(\"Recibido\");\r\n    }\r\n\r\n    @GetMapping(\"/confirmar-pago\")\r\n    public ResponseEntity<?> confirmarPago(@RequestParam(\"session_id\") String sessionId) {\r\n        try {\r\n            pagoService.verificarPagoCompletado(sessionId);\r\n\r\n            return ResponseEntity.ok(\"Compra verificada y finalizada con éxito.\");\r\n\r\n        } catch (StripeException e) {\r\n            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(\"Error de Stripe al verificar: \" + e.getMessage());\r\n        } catch (Exception e) {\r\n            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(\"Error al finalizar la compra: \" + e.getMessage());\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/usuarios/src/main/java/com/level_up/usuarios/controller/PagoController.java b/usuarios/src/main/java/com/level_up/usuarios/controller/PagoController.java
+--- a/usuarios/src/main/java/com/level_up/usuarios/controller/PagoController.java	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/usuarios/src/main/java/com/level_up/usuarios/controller/PagoController.java	(date 1764955969949)
+@@ -10,6 +10,9 @@
+ import com.stripe.model.checkout.Session;
+ 
+ import com.stripe.net.Webhook;
++import io.swagger.v3.oas.annotations.Operation;
++import io.swagger.v3.oas.annotations.responses.ApiResponse;
++import io.swagger.v3.oas.annotations.tags.Tag;
+ import lombok.RequiredArgsConstructor;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+@@ -21,15 +24,14 @@
+ @RestController
+ @RequiredArgsConstructor
+ @RequestMapping("/api/stripe")
++@Tag(name = "Gestor de pagos", description = "Endpoints utilizados para gestionar los pagos")
+ public class PagoController {
+ 
+     private final PagoService pagoService;
+     private final UsuarioRepository usuarioRepository;
+ 
+-    // 1. Modificamos el DTO: Ya no necesitamos recibir 'amount' desde el frontend
+     static class CreatePaymentRequest {
+-        // Puedes dejarlo vacío o agregar otros campos si necesitas (ej. dirección)
+-        // Por ahora no necesitamos nada del cuerpo si el token trae la identidad.
++
+     }
+ 
+     static class CreatePaymentResponse {
+@@ -39,12 +41,14 @@
+         public String getUrl() { return url; }
+     }
+ 
++    @Operation(summary = "Realizar pago en base al carrito del usuario")
++    @ApiResponse(responseCode = "200", description = "Link de pago generado con exito")
++    @ApiResponse(responseCode = "400", description = "Error al realizar el pago")
++    @ApiResponse(responseCode = "403", description = "Usuario sin roles suficientes para realizar la operacion")
++    @ApiResponse(responseCode = "500", description = "Error inesperado no controlado")
+     @PostMapping("/pagar")
+-    public ResponseEntity<?> createPaymentSession(/* @RequestBody CreatePaymentRequest request */) {
+-        // Nota: Si no envías nada en el body desde frontend, puedes quitar @RequestBody
++    public ResponseEntity<?> createPaymentSession() {
+         try {
+-            // 2. ELIMINADO: Ya no validamos request.getAmount() porque no confiamos en el front.
+-
+             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+             if (authentication == null || !authentication.isAuthenticated()) {
+                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("No autorizado");
+@@ -66,29 +70,11 @@
+         }
+     }
+ 
+-    @PostMapping("/webhook")
+-    public ResponseEntity<String> handleStripeWebhook(@RequestBody String payload, @RequestHeader("Stripe-Signature") String sigHeader) {
+-        Event event;
+-        try {
+-            event = Webhook.constructEvent(payload, sigHeader, "TU_CLAVE_SECRETA_DE_WEBHOOK");
+-        } catch (SignatureVerificationException e) {
+-            // Firma inválida
+-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Firma inválida");
+-        }
+-
+-        if ("checkout.session.completed".equals(event.getType())) {
+-            Session session = (Session) event.getDataObjectDeserializer().getObject().orElse(null);
+-
+-            if (session != null) {
+-                String customerId = session.getCustomer();
+-
+-                pagoService.finalizarCompra(customerId);
+-            }
+-        }
+-
+-        return ResponseEntity.ok("Recibido");
+-    }
+-
++    @Operation(summary = "Confirmar pago")
++    @ApiResponse(responseCode = "200", description = "Confirmacion de pago realizada con exito")
++    @ApiResponse(responseCode = "400", description = "Error al realizar confirmacion de pago")
++    @ApiResponse(responseCode = "403", description = "Usuario sin roles suficientes para realizar la operacion")
++    @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+     @GetMapping("/confirmar-pago")
+     public ResponseEntity<?> confirmarPago(@RequestParam("session_id") String sessionId) {
+         try {
+Index: usuarios/src/main/java/com/level_up/usuarios/config/SecurityConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.level_up.usuarios.config;\r\n\r\nimport com.level_up.usuarios.security.JwtAuthFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationProvider;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\nimport org.springframework.web.cors.CorsConfiguration;\r\nimport org.springframework.web.cors.CorsConfigurationSource;\r\nimport org.springframework.web.cors.UrlBasedCorsConfigurationSource;\r\n\r\nimport java.util.Arrays;\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\n@RequiredArgsConstructor\r\npublic class SecurityConfig {\r\n\r\n    private final JwtAuthFilter jwtAuthFilter;\r\n    private final AuthenticationProvider authenticationProvider;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n            .cors(cors -> cors.configurationSource(corsConfigurationSource()))\r\n            .csrf(csrf -> csrf.disable())\r\n            .authorizeHttpRequests(auth -> auth\r\n                    .requestMatchers(\"/api/auth/**\").permitAll()\r\n                    .requestMatchers(\"/uploads/**\").permitAll()\r\n                    .requestMatchers(\"/api/admin/**\").hasRole(\"ADMIN\")\r\n                    .requestMatchers(\"/api/productos/**\").hasAnyRole(\"ADMIN\", \"USER\")\r\n                    .requestMatchers(\"/api/stripe/**\").authenticated()\r\n                    .anyRequest().authenticated()\r\n            )\r\n            .sessionManagement(sess -> sess\r\n                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n            )\r\n            .authenticationProvider(authenticationProvider)\r\n            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public CorsConfigurationSource corsConfigurationSource() {\r\n        CorsConfiguration configuration = new CorsConfiguration();\r\n\r\n        configuration.setAllowedOrigins(Arrays.asList(\"http://localhost:5173\"));\r\n\r\n        configuration.setAllowedMethods(Arrays.asList(\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"));\r\n        configuration.setAllowedHeaders(Arrays.asList(\"Authorization\", \"Content-Type\"));\r\n        configuration.setAllowCredentials(true);\r\n\r\n        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();\r\n        source.registerCorsConfiguration(\"/**\", configuration);\r\n        return source;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/usuarios/src/main/java/com/level_up/usuarios/config/SecurityConfig.java b/usuarios/src/main/java/com/level_up/usuarios/config/SecurityConfig.java
+--- a/usuarios/src/main/java/com/level_up/usuarios/config/SecurityConfig.java	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/usuarios/src/main/java/com/level_up/usuarios/config/SecurityConfig.java	(date 1764955969948)
+@@ -27,21 +27,24 @@
+     @Bean
+     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+         http
+-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+-            .csrf(csrf -> csrf.disable())
+-            .authorizeHttpRequests(auth -> auth
+-                    .requestMatchers("/api/auth/**").permitAll()
+-                    .requestMatchers("/uploads/**").permitAll()
+-                    .requestMatchers("/api/admin/**").hasRole("ADMIN")
+-                    .requestMatchers("/api/productos/**").hasAnyRole("ADMIN", "USER")
+-                    .requestMatchers("/api/stripe/**").authenticated()
+-                    .anyRequest().authenticated()
+-            )
+-            .sessionManagement(sess -> sess
+-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+-            )
+-            .authenticationProvider(authenticationProvider)
+-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
++                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
++                .csrf(csrf -> csrf.disable())
++                .authorizeHttpRequests(auth -> auth
++                        .requestMatchers("/swagger-ui/**").permitAll()
++                        .requestMatchers("/v3/api-docs/**").permitAll()
++
++                        .requestMatchers("/api/auth/**").permitAll()
++                        .requestMatchers("/uploads/**").permitAll()
++                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
++                        .requestMatchers("/api/productos/**").hasAnyRole("ADMIN", "USER")
++                        .requestMatchers("/api/stripe/**").authenticated()
++                        .anyRequest().authenticated()
++                )
++                .sessionManagement(sess -> sess
++                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
++                )
++                .authenticationProvider(authenticationProvider)
++                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+ 
+         return http.build();
+     }
+@@ -61,4 +64,4 @@
+         return source;
+     }
+ 
+-}
++}
+\ No newline at end of file
+Index: usuarios/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n\t<modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>com.level_up</groupId>\r\n        <artifactId>microservicios</artifactId>\r\n        <version>1.0.0</version>\r\n        <relativePath>../pom.xml</relativePath>\r\n    </parent>\r\n\t<groupId>com.level_up</groupId>\r\n\t<artifactId>usuarios</artifactId>\r\n\t<version>0.0.1-SNAPSHOT</version>\r\n\t<name>usuarios</name>\r\n\t<description>Microservicio de usuarios desarrollado para Level-Up Gamer</description>\r\n\t<url/>\r\n\t<licenses>\r\n\t\t<license/>\r\n\t</licenses>\r\n\t<developers>\r\n\t\t<developer/>\r\n\t</developers>\r\n\t<scm>\r\n\t\t<connection/>\r\n\t\t<developerConnection/>\r\n\t\t<tag/>\r\n\t\t<url/>\r\n\t</scm>\r\n\t<properties>\r\n\t\t<java.version>17</java.version>\r\n\t</properties>\r\n\t<dependencies>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-data-jpa</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-web</artifactId>\r\n\t\t</dependency>\r\n\r\n        <!-- Validator -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-validation</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Spring Security -->\r\n        <dependency>\r\n            <groupId>org.springframework.security</groupId>\r\n            <artifactId>spring-security-crypto</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Stripe -->\r\n        <dependency>\r\n            <groupId>com.stripe</groupId>\r\n            <artifactId>stripe-java</artifactId>\r\n            <version>25.13.0</version>\r\n        </dependency>\r\n\r\n        <!-- Json Web Token -->\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-api</artifactId>\r\n            <version>0.11.5</version>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-impl</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-jackson</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-security</artifactId>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework.cloud</groupId>\r\n            <artifactId>spring-cloud-starter-openfeign</artifactId>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework.cloud</groupId>\r\n            <artifactId>spring-cloud-starter-loadbalancer</artifactId>\r\n        </dependency>\r\n\r\n        <dependency>\r\n\t\t\t<groupId>com.h2database</groupId>\r\n\t\t\t<artifactId>h2</artifactId>\r\n\t\t\t<scope>runtime</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t<optional>true</optional>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-test</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n        <dependency>\r\n            <groupId>io.swagger.core.v3</groupId>\r\n            <artifactId>swagger-annotations-jakarta</artifactId>\r\n            <version>2.2.38</version>\r\n            <scope>compile</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n\t<build>\r\n\t\t<plugins>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.apache.maven.plugins</groupId>\r\n\t\t\t\t<artifactId>maven-compiler-plugin</artifactId>\r\n\t\t\t\t<configuration>\r\n\t\t\t\t\t<annotationProcessorPaths>\r\n\t\t\t\t\t\t<path>\r\n\t\t\t\t\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t\t\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t\t\t\t</path>\r\n\t\t\t\t\t</annotationProcessorPaths>\r\n\t\t\t\t</configuration>\r\n\t\t\t</plugin>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\r\n\t\t\t\t<configuration>\r\n\t\t\t\t\t<excludes>\r\n\t\t\t\t\t\t<exclude>\r\n\t\t\t\t\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t\t\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t\t\t\t</exclude>\r\n\t\t\t\t\t</excludes>\r\n\t\t\t\t</configuration>\r\n\t\t\t</plugin>\r\n\t\t</plugins>\r\n\t</build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/usuarios/pom.xml b/usuarios/pom.xml
+--- a/usuarios/pom.xml	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/usuarios/pom.xml	(date 1764955969946)
+@@ -39,6 +39,12 @@
+ 			<artifactId>spring-boot-starter-web</artifactId>
+ 		</dependency>
+ 
++        <!-- OpenAPI -->
++        <dependency>
++            <groupId>org.springdoc</groupId>
++            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
++        </dependency>
++
+         <!-- Validator -->
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+Index: carrito/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n\t<modelVersion>4.0.0</modelVersion>\r\n    <parent>\r\n        <groupId>com.level_up</groupId>\r\n        <artifactId>microservicios</artifactId>\r\n        <version>1.0.0</version>\r\n        <relativePath>../pom.xml</relativePath>\r\n\t</parent>\r\n\t<artifactId>carrito</artifactId>\r\n\t<version>0.0.1-SNAPSHOT</version>\r\n\t<name>carrito</name>\r\n\t<description>Demo project for Spring Boot</description>\r\n\t<url/>\r\n\t<licenses>\r\n\t\t<license/>\r\n\t</licenses>\r\n\t<developers>\r\n\t\t<developer/>\r\n\t</developers>\r\n\t<scm>\r\n\t\t<connection/>\r\n\t\t<developerConnection/>\r\n\t\t<tag/>\r\n\t\t<url/>\r\n\t</scm>\r\n\t<properties>\r\n\t\t<java.version>17</java.version>\r\n\t</properties>\r\n\t<dependencies>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-data-jpa</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-web</artifactId>\r\n\t\t</dependency>\r\n\r\n        <!-- Spring Cloud -->\r\n        <dependency>\r\n            <groupId>org.springframework.cloud</groupId>\r\n            <artifactId>spring-cloud-starter-openfeign</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Spring Security -->\r\n        <dependency>\r\n            <groupId>org.springframework.boot</groupId>\r\n            <artifactId>spring-boot-starter-security</artifactId>\r\n        </dependency>\r\n\r\n        <!-- Json Web Token -->\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-api</artifactId>\r\n            <version>0.11.5</version>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-impl</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n        \r\n        <dependency>\r\n            <groupId>io.jsonwebtoken</groupId>\r\n            <artifactId>jjwt-jackson</artifactId>\r\n            <version>0.11.5</version>\r\n            <scope>runtime</scope>\r\n        </dependency>\r\n\r\n        <dependency>\r\n            <groupId>org.springframework.cloud</groupId>\r\n            <artifactId>spring-cloud-starter-loadbalancer</artifactId>\r\n        </dependency>\r\n\r\n\t\t<dependency>\r\n\t\t\t<groupId>com.h2database</groupId>\r\n\t\t\t<artifactId>h2</artifactId>\r\n\t\t\t<scope>runtime</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t<optional>true</optional>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-test</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n        <dependency>\r\n            <groupId>jakarta.validation</groupId>\r\n            <artifactId>jakarta.validation-api</artifactId>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>io.swagger.core.v3</groupId>\r\n            <artifactId>swagger-annotations-jakarta</artifactId>\r\n            <version>2.2.38</version>\r\n            <scope>compile</scope>\r\n        </dependency>\r\n        <dependency>\r\n            <groupId>com.level_up</groupId>\r\n            <artifactId>usuarios</artifactId>\r\n            <version>0.0.1-SNAPSHOT</version>\r\n            <scope>compile</scope>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n\t<build>\r\n\t\t<plugins>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.apache.maven.plugins</groupId>\r\n\t\t\t\t<artifactId>maven-compiler-plugin</artifactId>\r\n\t\t\t\t<configuration>\r\n\t\t\t\t\t<annotationProcessorPaths>\r\n\t\t\t\t\t\t<path>\r\n\t\t\t\t\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t\t\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t\t\t\t</path>\r\n\t\t\t\t\t</annotationProcessorPaths>\r\n\t\t\t\t</configuration>\r\n\t\t\t</plugin>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\r\n\t\t\t\t<configuration>\r\n\t\t\t\t\t<excludes>\r\n\t\t\t\t\t\t<exclude>\r\n\t\t\t\t\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t\t\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t\t\t\t</exclude>\r\n\t\t\t\t\t</excludes>\r\n\t\t\t\t</configuration>\r\n\t\t\t</plugin>\r\n\t\t</plugins>\r\n\t</build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/carrito/pom.xml b/carrito/pom.xml
+--- a/carrito/pom.xml	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/carrito/pom.xml	(date 1764955969942)
+@@ -38,6 +38,12 @@
+ 			<artifactId>spring-boot-starter-web</artifactId>
+ 		</dependency>
+ 
++        <!-- OpenAPI -->
++        <dependency>
++            <groupId>org.springdoc</groupId>
++            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
++        </dependency>
++
+         <!-- Spring Cloud -->
+         <dependency>
+             <groupId>org.springframework.cloud</groupId>
+Index: productos/src/main/java/com/level_up/productos/controller/ProductoController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.level_up.productos.controller;\r\n\r\nimport com.level_up.productos.dto.ProductoDTO;\r\nimport com.level_up.productos.dto.ProductoRetornoDTO;\r\nimport com.level_up.productos.enums.CategoriaEnum;\r\nimport com.level_up.productos.model.ProductoModel;\r\nimport com.level_up.productos.service.ProductoService;\r\nimport io.swagger.v3.oas.annotations.Operation;\r\nimport io.swagger.v3.oas.annotations.responses.ApiResponse;\r\nimport io.swagger.v3.oas.annotations.tags.Tag;\r\nimport jakarta.validation.Valid;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.List;\r\n\r\n@CrossOrigin\r\n@RestController\r\n@RequestMapping(\"/api/productos\")\r\n@Tag(name = \"Gestion de productos\", description = \"Endpoints para gestionar los productos\")\r\npublic class ProductoController {\r\n\r\n    @Autowired\r\n    private ProductoService productoService;\r\n\r\n    // \uD83D\uDD12 Agregar producto\r\n    @Operation(summary = \"Agregar producto\")\r\n    @ApiResponse(responseCode = \"201\", description = \"Se creo el recurso\")\r\n    @ApiResponse(responseCode = \"409\", description = \"Conflicto al intentar crear el recurso\")\r\n    @ApiResponse(responseCode = \"500\", description = \"Error interno del servidor\")\r\n    @PostMapping\r\n    @CrossOrigin\r\n    public ResponseEntity<ProductoRetornoDTO> agregarProducto(@Valid @RequestBody ProductoDTO productoDTO) {\r\n        ProductoRetornoDTO producto = productoService.agregarProducto(productoDTO);\r\n        return ResponseEntity.status(HttpStatus.CREATED).body(producto);\r\n    }\r\n\r\n    // \uD83D\uDD12 Eliminar producto\r\n    @ApiResponse(responseCode = \"204\", description = \"Se elimino el recurso\")\r\n    @ApiResponse(responseCode = \"409\", description = \"Conflicto al intentar eliminar el recurso\")\r\n    @ApiResponse(responseCode = \"500\", description = \"Error interno del servidor\")\r\n    @DeleteMapping(\"/delete/{codigoProducto}\")\r\n    public ResponseEntity<Void> eliminarProducto(@PathVariable(\"codigoProducto\") String codigoProducto) {\r\n        productoService.eliminarProducto(codigoProducto);\r\n        return ResponseEntity.noContent().build();\r\n    }\r\n\r\n    // ✅ Obtener todos los productos\r\n    @Operation(summary = \"Obtener todos los productos\")\r\n    @ApiResponse(responseCode = \"200\", description = \"Se obtuvo el recurso correctamente\")\r\n    @ApiResponse(responseCode = \"404\", description = \"No se encontro el recurso\")\r\n    @ApiResponse(responseCode = \"500\", description = \"Error interno del servidor\")\r\n    @GetMapping\r\n    public ResponseEntity<List<ProductoRetornoDTO>> obtenerTodosLosProductos() {\r\n        List<ProductoRetornoDTO> lista_productos = productoService.findAll();\r\n        return ResponseEntity.ok(lista_productos);\r\n    }\r\n\r\n    // ✅ Buscar producto con ID\r\n    @Operation(summary = \"Buscar producto por ID\")\r\n    @ApiResponse(responseCode = \"200\", description = \"Se obtuvo el recurso correctamente\")\r\n    @ApiResponse(responseCode = \"404\", description = \"No se encontro el recurso\")\r\n    @ApiResponse(responseCode = \"500\", description = \"Error interno del servidor\")\r\n    @GetMapping(\"/{idProducto}\")\r\n    public ResponseEntity<ProductoRetornoDTO> encontrarProductoPorId(@PathVariable(\"idProducto\") Long idProducto) {\r\n        ProductoRetornoDTO productoEncontrado = productoService.findById(idProducto);\r\n        return ResponseEntity.ok(productoEncontrado);\r\n    }\r\n\r\n    // ✅ Buscar producto con CODIGO\r\n    @Operation(summary = \"Buscar producto por CODIGO\")\r\n    @ApiResponse(responseCode = \"200\", description = \"Se obtuvo el recurso correctamente\")\r\n    @ApiResponse(responseCode = \"404\", description = \"No se encontro el recurso\")\r\n    @ApiResponse(responseCode = \"500\", description = \"Error interno del servidor\")\r\n    @GetMapping(\"/code/{codigoProducto}\")\r\n    public ResponseEntity<ProductoRetornoDTO> encontrarProductoPorCodigo(@PathVariable(\"codigoProducto\") String codigoProducto) {\r\n        ProductoRetornoDTO productoEncontrado = productoService.findByCodigoProducto(codigoProducto);\r\n        return ResponseEntity.ok(productoEncontrado);\r\n    }\r\n\r\n    // ✅ Filtrar productos por categoria\r\n    @Operation(summary = \"Filtrar los productos por categoria\")\r\n    @ApiResponse(responseCode = \"200\", description = \"Se obtuvo el recurso correctamente\")\r\n    @ApiResponse(responseCode = \"204\", description = \"Se obtuvo el recurso pero esta vacio\")\r\n    @ApiResponse(responseCode = \"404\", description = \"No se encontro el recurso\")\r\n    @ApiResponse(responseCode = \"500\", description = \"Error interno del servidor\")\r\n    @GetMapping(\"/filtrar\")\r\n    public ResponseEntity<List<ProductoRetornoDTO>> obtenerProductosPorCategoria(@RequestParam CategoriaEnum categoria) {\r\n        List<ProductoRetornoDTO> productos = productoService.filtrarProductosPorCategoria(categoria);\r\n        if (productos.isEmpty()) {\r\n            return ResponseEntity.noContent().build();\r\n        }\r\n        return ResponseEntity.ok(productos);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/productos/src/main/java/com/level_up/productos/controller/ProductoController.java b/productos/src/main/java/com/level_up/productos/controller/ProductoController.java
+--- a/productos/src/main/java/com/level_up/productos/controller/ProductoController.java	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/productos/src/main/java/com/level_up/productos/controller/ProductoController.java	(date 1764955969946)
+@@ -26,7 +26,7 @@
+     private ProductoService productoService;
+ 
+     // 🔒 Agregar producto
+-    @Operation(summary = "Agregar producto")
++    @Operation(summary = "🔒 Agregar producto")
+     @ApiResponse(responseCode = "201", description = "Se creo el recurso")
+     @ApiResponse(responseCode = "409", description = "Conflicto al intentar crear el recurso")
+     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+@@ -38,6 +38,7 @@
+     }
+ 
+     // 🔒 Eliminar producto
++    @Operation(summary = "🔒 Eliminar producto")
+     @ApiResponse(responseCode = "204", description = "Se elimino el recurso")
+     @ApiResponse(responseCode = "409", description = "Conflicto al intentar eliminar el recurso")
+     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+Index: productos/src/main/java/com/level_up/productos/config/SecurityConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.level_up.productos.config;\r\n\r\nimport com.level_up.productos.security.JwtAuthFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.http.HttpMethod;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\nimport org.springframework.web.cors.CorsConfiguration;\r\nimport org.springframework.web.cors.CorsConfigurationSource;\r\nimport org.springframework.web.cors.UrlBasedCorsConfigurationSource;\r\n\r\nimport java.util.Arrays;\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\n@RequiredArgsConstructor\r\npublic class SecurityConfig {\r\n\r\n    private final JwtAuthFilter jwtAuthFilter;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .cors(cors -> cors.configurationSource(corsConfigurationSource()))\r\n                .csrf(csrf -> csrf.disable())\r\n                .authorizeHttpRequests(auth -> auth\r\n                        .requestMatchers(\"/uploads/**\").permitAll()\r\n\r\n                        .requestMatchers(HttpMethod.GET, \"/api/productos/**\").permitAll()\r\n\r\n                        .requestMatchers(HttpMethod.POST, \"/api/productos/**\").hasRole(\"ADMIN\")\r\n                        .requestMatchers(HttpMethod.PUT, \"/api/productos/**\").hasRole(\"ADMIN\")\r\n                        .requestMatchers(HttpMethod.DELETE, \"/api/productos/**\").hasRole(\"ADMIN\")\r\n\r\n                        .anyRequest().authenticated()\r\n                )\r\n                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public CorsConfigurationSource corsConfigurationSource() {\r\n        CorsConfiguration configuration = new CorsConfiguration();\r\n        configuration.setAllowedOrigins(Arrays.asList(\"http://localhost:5173\"));\r\n        configuration.setAllowedMethods(Arrays.asList(\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"));\r\n        configuration.setAllowedHeaders(Arrays.asList(\"Authorization\", \"Content-Type\"));\r\n        configuration.setAllowCredentials(true);\r\n\r\n        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();\r\n        source.registerCorsConfiguration(\"/**\", configuration);\r\n        return source;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/productos/src/main/java/com/level_up/productos/config/SecurityConfig.java b/productos/src/main/java/com/level_up/productos/config/SecurityConfig.java
+--- a/productos/src/main/java/com/level_up/productos/config/SecurityConfig.java	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/productos/src/main/java/com/level_up/productos/config/SecurityConfig.java	(date 1764955969945)
+@@ -30,9 +30,9 @@
+                 .csrf(csrf -> csrf.disable())
+                 .authorizeHttpRequests(auth -> auth
+                         .requestMatchers("/uploads/**").permitAll()
+-
++                        .requestMatchers("/swagger-ui/**").permitAll()
++                        .requestMatchers("/v3/api-docs/**").permitAll()
+                         .requestMatchers(HttpMethod.GET, "/api/productos/**").permitAll()
+-
+                         .requestMatchers(HttpMethod.POST, "/api/productos/**").hasRole("ADMIN")
+                         .requestMatchers(HttpMethod.PUT, "/api/productos/**").hasRole("ADMIN")
+                         .requestMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
+Index: carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.level_up.carrito.config;\r\n\r\nimport com.level_up.carrito.security.JwtAuthFilter;\r\nimport lombok.RequiredArgsConstructor;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.http.HttpMethod;\r\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\r\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\r\nimport org.springframework.security.config.http.SessionCreationPolicy;\r\nimport org.springframework.security.web.SecurityFilterChain;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\nimport org.springframework.web.cors.CorsConfiguration;\r\nimport org.springframework.web.cors.CorsConfigurationSource;\r\nimport org.springframework.web.cors.UrlBasedCorsConfigurationSource;\r\n\r\nimport java.util.Arrays;\r\n\r\n@Configuration\r\n@EnableWebSecurity\r\n@RequiredArgsConstructor\r\npublic class SecurityConfig {\r\n\r\n    private final JwtAuthFilter jwtAuthFilter;\r\n\r\n    @Bean\r\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\r\n        http\r\n                .csrf(csrf -> csrf.disable())\r\n                .cors(cors -> cors.configure(http))\r\n                .authorizeHttpRequests(auth -> auth\r\n\r\n                        // 1. REGLAS PERMITIDAS (DEBEN IR PRIMERO)\r\n\r\n                        // \uD83D\uDD11 SOLUCIÓN: Especificamos explícitamente el método PUT\r\n                        .requestMatchers(HttpMethod.PUT, \"/api/carritos/*/vaciar\").permitAll()\r\n\r\n                        // Mantenemos esta por si acaso, aunque la de arriba es la que falla.\r\n                        .requestMatchers(\"/api/public/**\").permitAll()\r\n\r\n                        // 2. REGLA PROTEGIDA POR ROLES (VA DESPUÉS)\r\n                        .requestMatchers(\"/api/carritos/**\").hasAnyRole(\"USER\", \"ADMIN\")\r\n\r\n                        // 3. Todo lo demás requiere autenticación\r\n                        .anyRequest().authenticated()\r\n                )\r\n                .sessionManagement(sess -> sess\r\n                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)\r\n                )\r\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\r\n\r\n        return http.build();\r\n    }\r\n\r\n    @Bean\r\n    public CorsConfigurationSource corsConfigurationSource() {\r\n        CorsConfiguration configuration = new CorsConfiguration();\r\n\r\n        configuration.setAllowedOrigins(Arrays.asList(\"http://localhost:5173\"));\r\n\r\n        configuration.setAllowedMethods(Arrays.asList(\"GET\", \"POST\", \"PUT\", \"DELETE\", \"OPTIONS\"));\r\n        configuration.setAllowedHeaders(Arrays.asList(\"Authorization\", \"Content-Type\"));\r\n        configuration.setAllowCredentials(true);\r\n\r\n        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();\r\n        source.registerCorsConfiguration(\"/**\", configuration);\r\n        return source;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java b/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java
+--- a/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java	(revision 070eb119ca0b5f98efe4dafcfc4e0b390d11bd15)
++++ b/carrito/src/main/java/com/level_up/carrito/config/SecurityConfig.java	(date 1764955969944)
+@@ -29,19 +29,11 @@
+                 .csrf(csrf -> csrf.disable())
+                 .cors(cors -> cors.configure(http))
+                 .authorizeHttpRequests(auth -> auth
+-
+-                        // 1. REGLAS PERMITIDAS (DEBEN IR PRIMERO)
+-
+-                        // 🔑 SOLUCIÓN: Especificamos explícitamente el método PUT
++                        .requestMatchers("/swagger-ui/**").permitAll()
++                        .requestMatchers("/v3/api-docs/**").permitAll()
+                         .requestMatchers(HttpMethod.PUT, "/api/carritos/*/vaciar").permitAll()
+-
+-                        // Mantenemos esta por si acaso, aunque la de arriba es la que falla.
+                         .requestMatchers("/api/public/**").permitAll()
+-
+-                        // 2. REGLA PROTEGIDA POR ROLES (VA DESPUÉS)
+                         .requestMatchers("/api/carritos/**").hasAnyRole("USER", "ADMIN")
+-
+-                        // 3. Todo lo demás requiere autenticación
+                         .anyRequest().authenticated()
+                 )
+                 .sessionManagement(sess -> sess
