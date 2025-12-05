@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/productos")
 @Tag(name = "Gestion de productos", description = "Endpoints para gestionar los productos")
@@ -30,13 +31,14 @@ public class ProductoController {
     @ApiResponse(responseCode = "409", description = "Conflicto al intentar crear el recurso")
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<ProductoRetornoDTO> agregarProducto(@Valid @RequestBody ProductoDTO productoDTO) {
         ProductoRetornoDTO producto = productoService.agregarProducto(productoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(producto);
     }
 
     // 🔒 Eliminar producto
-    @ApiResponse(responseCode = "201", description = "Se creo el recurso")
+    @ApiResponse(responseCode = "204", description = "Se elimino el recurso")
     @ApiResponse(responseCode = "409", description = "Conflicto al intentar eliminar el recurso")
     @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     @DeleteMapping("/delete/{codigoProducto}")

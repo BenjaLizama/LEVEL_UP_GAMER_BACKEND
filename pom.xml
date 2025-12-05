@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <name>Backend Level-Up Gamer</name>
-    <description>Proyecto raíz que agrupa todos los microservicios</description>
+    <description>Proyecto raÃz que agrupa todos los microservicios</description>
 
     <modules>
         <module>usuarios</module>
