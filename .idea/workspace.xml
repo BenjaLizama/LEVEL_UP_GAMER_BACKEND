@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="402149b8-997e-4fa3-a4d9-9e83318fe7ea" name="Changes" comment="" />
+    <list default="true" id="402149b8-997e-4fa3-a4d9-9e83318fe7ea" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carrito/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carrito/src/test/java/com/level_up/carrito/controller/CarritoControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/carrito/src/test/java/com/level_up/carrito/controller/CarritoControllerTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,8 +50,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Carrito.executor": "Run",
     "Application.CarritoApp.executor": "Run",
+    "Application.Productos.executor": "Run",
     "Application.ProductosApplication.executor": "Run",
+    "Application.Usuarios.executor": "Run",
     "Application.UsuariosApplication.executor": "Run",
     "JUnit.AuthControllerTest.agregarUsuario.executor": "Run",
     "JUnit.AuthControllerTest.crearUsuarioCorreoDuplicado.executor": "Run",
@@ -56,6 +63,11 @@
     "JUnit.AuthControllerTest.iniciarSesionIncorrecto.executor": "Run",
     "JUnit.AuthControllerTest.inicioDeSesionCorrecto.executor": "Run",
     "JUnit.AuthControllerTest.inicioDeSesionIncorrecto.executor": "Run",
+    "JUnit.CarritoControllerTest.agregarItem.executor": "Run",
+    "JUnit.CarritoControllerTest.agregarItemExitoso.executor": "Run",
+    "JUnit.CarritoControllerTest.obtenerCarrito.executor": "Run",
+    "JUnit.CarritoControllerTest.obtenerCarritoAdmin.executor": "Run",
+    "JUnit.agregarProducto.executor": "Run",
     "Maven.microservicios [clean].executor": "Run",
     "Maven.microservicios [package].executor": "Run",
     "Maven.productos [clean].executor": "Run",
@@ -63,7 +75,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "Merging main"
+    "git-widget-placeholder": "main"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -75,100 +87,142 @@
       <recent name="com.level_up.usuarios.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AuthControllerTest.crearUsuarioCorreoDuplicado">
-    <configuration name="AuthControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CarritoControllerTest">
+    <configuration name="Carrito" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.CarritoApplication" />
+      <module name="carrito" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Productos" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.ProductosApplication" />
+      <module name="productos" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Usuarios" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.UsuariosApplication" />
       <module name="usuarios" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="CompoundRunConfigurationType">
+      <toRun name="Carrito" type="Application" />
+      <toRun name="Productos" type="Application" />
+      <toRun name="Usuarios" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration name="CarritoControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carrito" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
+          <option name="PATTERN" value="com.level_up.carrito.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
+      <option name="PACKAGE_NAME" value="com.level_up.carrito.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.controller.CarritoControllerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthControllerTest.agregarUsuario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="usuarios" />
+    <configuration name="CarritoControllerTest.agregarItem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carrito" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
+          <option name="PATTERN" value="com.level_up.carrito.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
-      <option name="METHOD_NAME" value="agregarUsuario" />
+      <option name="PACKAGE_NAME" value="com.level_up.carrito.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.controller.CarritoControllerTest" />
+      <option name="METHOD_NAME" value="agregarItem" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthControllerTest.crearUsuarioCorreoDuplicado" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="usuarios" />
+    <configuration name="CarritoControllerTest.agregarItemExitoso" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carrito" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
+          <option name="PATTERN" value="com.level_up.carrito.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
-      <option name="METHOD_NAME" value="crearUsuarioCorreoDuplicado" />
+      <option name="PACKAGE_NAME" value="com.level_up.carrito.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.controller.CarritoControllerTest" />
+      <option name="METHOD_NAME" value="agregarItemExitoso" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthControllerTest.inicioDeSesionCorrecto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="usuarios" />
+    <configuration name="CarritoControllerTest.obtenerCarrito" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carrito" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
+          <option name="PATTERN" value="com.level_up.carrito.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
-      <option name="METHOD_NAME" value="inicioDeSesionCorrecto" />
+      <option name="PACKAGE_NAME" value="com.level_up.carrito.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.controller.CarritoControllerTest" />
+      <option name="METHOD_NAME" value="obtenerCarrito" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthControllerTest.inicioDeSesionIncorrecto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="usuarios" />
+    <configuration name="CarritoControllerTest.obtenerCarritoAdmin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="carrito" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
+          <option name="PATTERN" value="com.level_up.carrito.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
-      <option name="METHOD_NAME" value="inicioDeSesionIncorrecto" />
+      <option name="PACKAGE_NAME" value="com.level_up.carrito.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.controller.CarritoControllerTest" />
+      <option name="METHOD_NAME" value="obtenerCarritoAdmin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="agregarProducto" type="JUnit" factoryName="JUnit">
+      <module name="productos" />
+      <option name="PACKAGE_NAME" value="com.level_up.productos.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.controller.ProductoControllerTest" />
+      <option name="METHOD_NAME" value="agregarProducto" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.AuthControllerTest" />
-      <item itemvalue="JUnit.AuthControllerTest.crearUsuarioCorreoDuplicado" />
-      <item itemvalue="JUnit.AuthControllerTest.inicioDeSesionCorrecto" />
-      <item itemvalue="JUnit.AuthControllerTest.inicioDeSesionIncorrecto" />
-      <item itemvalue="JUnit.AuthControllerTest.agregarUsuario" />
+      <item itemvalue="Application.Carrito" />
+      <item itemvalue="Application.Productos" />
+      <item itemvalue="Application.Usuarios" />
+      <item itemvalue="Compound.App" />
+      <item itemvalue="JUnit.agregarProducto" />
+      <item itemvalue="JUnit.CarritoControllerTest" />
+      <item itemvalue="JUnit.CarritoControllerTest.agregarItem" />
+      <item itemvalue="JUnit.CarritoControllerTest.agregarItemExitoso" />
+      <item itemvalue="JUnit.CarritoControllerTest.obtenerCarrito" />
+      <item itemvalue="JUnit.CarritoControllerTest.obtenerCarritoAdmin" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AuthControllerTest.crearUsuarioCorreoDuplicado" />
-        <item itemvalue="JUnit.AuthControllerTest" />
-        <item itemvalue="JUnit.AuthControllerTest.inicioDeSesionCorrecto" />
-        <item itemvalue="JUnit.AuthControllerTest.inicioDeSesionIncorrecto" />
-        <item itemvalue="JUnit.AuthControllerTest.agregarUsuario" />
+        <item itemvalue="JUnit.CarritoControllerTest" />
+        <item itemvalue="JUnit.CarritoControllerTest.agregarItemExitoso" />
+        <item itemvalue="JUnit.CarritoControllerTest.agregarItem" />
+        <item itemvalue="JUnit.CarritoControllerTest.obtenerCarritoAdmin" />
+        <item itemvalue="JUnit.CarritoControllerTest.obtenerCarrito" />
       </list>
     </recent_temporary>
   </component>
