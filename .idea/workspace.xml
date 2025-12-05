@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="">
-<<<<<<< HEAD
+    <list default="true" id="402149b8-997e-4fa3-a4d9-9e83318fe7ea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios/src/main/java/com/level_up/usuarios/controller/AuthController.java" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/productos/src/test/java/com/level_up/productos/service/ProductoServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/test/java/com/level_up/productos/service/ProductoServiceTest.java" afterDir="false" />
->>>>>>> 2f09ef79dd3c3e020322a4bd112aaad4d5004a44
+      <change beforePath="$PROJECT_DIR$/productos/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/productos/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,24 +19,25 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "n3k0k4w4"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;n3k0k4w4&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/BenjaLizama/LEVEL_UP_GAMER_BACKEND.git",
-    "accountId": "0bf2ea88-9a06-41fd-8aad-4cc35f70bcbf"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/BenjaLizama/LEVEL_UP_GAMER_BACKEND.git&quot;,
+    &quot;accountId&quot;: &quot;0bf2ea88-9a06-41fd-8aad-4cc35f70bcbf&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -53,113 +50,134 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.CarritoApp.executor": "Run",
-    "Application.ProductosApp.executor": "Run",
-    "Application.UsuariosApp.executor": "Run",
-    "JUnit.ProductoControllerTest.executor": "Run",
-    "JUnit.ProductoServiceTest.executor": "Run",
-    "Maven.carrito [package].executor": "Run",
+    "Application.ProductosApplication.executor": "Run",
+    "Application.UsuariosApplication.executor": "Run",
+    "JUnit.AuthControllerTest.agregarUsuario.executor": "Run",
+    "JUnit.AuthControllerTest.crearUsuarioCorreoDuplicado.executor": "Run",
+    "JUnit.AuthControllerTest.executor": "Run",
+    "JUnit.AuthControllerTest.iniciarSesion.executor": "Run",
+    "JUnit.AuthControllerTest.iniciarSesionIncorrecto.executor": "Run",
+    "JUnit.AuthControllerTest.inicioDeSesionCorrecto.executor": "Run",
+    "JUnit.AuthControllerTest.inicioDeSesionIncorrecto.executor": "Run",
     "Maven.microservicios [clean].executor": "Run",
-    "Maven.microservicios [compile].executor": "Run",
-    "Maven.microservicios [install].executor": "Run",
     "Maven.microservicios [package].executor": "Run",
+    "Maven.productos [clean].executor": "Run",
     "Maven.productos [package].executor": "Run",
-    "Maven.usuarios [clean].executor": "Run",
-    "Maven.usuarios [deploy].executor": "Run",
-    "Maven.usuarios [install].executor": "Run",
-    "Maven.usuarios [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-<<<<<<< HEAD
-    "last_opened_file_path": "A:/workspace/LEVEL_UP_GAMER_BACKEND",
-=======
-    "last_opened_file_path": "C:/Users/steamreculiao/Documents/LEVEL_UP_GAMER_BACKEND",
->>>>>>> 2f09ef79dd3c3e020322a4bd112aaad4d5004a44
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.ProductoServiceTest">
-    <configuration name="CarritoApp" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.level_up.carrito.CarritoApplication" />
-      <module name="carrito" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProductosApp" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.ProductosApplication" />
-      <module name="productos" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UsuariosApp" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.UsuariosApplication" />
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.level_up.carrito.controller" />
+      <recent name="com.level_up.usuarios.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.AuthControllerTest.crearUsuarioCorreoDuplicado">
+    <configuration name="AuthControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="usuarios" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="App" type="CompoundRunConfigurationType">
-      <toRun name="CarritoApp" type="Application" />
-      <toRun name="ProductosApp" type="Application" />
-      <toRun name="UsuariosApp" type="Application" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ProductoControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="productos" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.level_up.productos.controller.*" />
+          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.level_up.productos.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.controller.ProductoControllerTest" />
+      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductoServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="productos" />
+    <configuration name="AuthControllerTest.agregarUsuario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usuarios" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.level_up.productos.service.*" />
+          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.level_up.productos.service" />
-      <option name="MAIN_CLASS_NAME" value="com.level_up.productos.service.ProductoServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
+      <option name="METHOD_NAME" value="agregarUsuario" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthControllerTest.crearUsuarioCorreoDuplicado" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usuarios" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
+      <option name="METHOD_NAME" value="crearUsuarioCorreoDuplicado" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthControllerTest.inicioDeSesionCorrecto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usuarios" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
+      <option name="METHOD_NAME" value="inicioDeSesionCorrecto" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthControllerTest.inicioDeSesionIncorrecto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usuarios" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.level_up.usuarios.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.level_up.usuarios.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.level_up.usuarios.controller.AuthControllerTest" />
+      <option name="METHOD_NAME" value="inicioDeSesionIncorrecto" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.CarritoApp" />
-      <item itemvalue="Application.ProductosApp" />
-      <item itemvalue="Application.UsuariosApp" />
-      <item itemvalue="Compound.App" />
-      <item itemvalue="JUnit.ProductoControllerTest" />
-      <item itemvalue="JUnit.ProductoServiceTest" />
+      <item itemvalue="JUnit.AuthControllerTest" />
+      <item itemvalue="JUnit.AuthControllerTest.crearUsuarioCorreoDuplicado" />
+      <item itemvalue="JUnit.AuthControllerTest.inicioDeSesionCorrecto" />
+      <item itemvalue="JUnit.AuthControllerTest.inicioDeSesionIncorrecto" />
+      <item itemvalue="JUnit.AuthControllerTest.agregarUsuario" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ProductoServiceTest" />
-        <item itemvalue="JUnit.ProductoControllerTest" />
+        <item itemvalue="JUnit.AuthControllerTest.crearUsuarioCorreoDuplicado" />
+        <item itemvalue="JUnit.AuthControllerTest" />
+        <item itemvalue="JUnit.AuthControllerTest.inicioDeSesionCorrecto" />
+        <item itemvalue="JUnit.AuthControllerTest.inicioDeSesionIncorrecto" />
+        <item itemvalue="JUnit.AuthControllerTest.agregarUsuario" />
       </list>
     </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="858852d7-fe19-4eae-9947-cab2146d14e9" name="Changes" comment="" />
+      <changelist id="402149b8-997e-4fa3-a4d9-9e83318fe7ea" name="Changes" comment="" />
       <created>1762562176339</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
