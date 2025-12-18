@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="402149b8-997e-4fa3-a4d9-9e83318fe7ea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-12-2025_3_15_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05-12-2025_3_15__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/controller/ProductoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/service/ProductoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/productos/src/main/java/com/level_up/productos/service/ProductoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
