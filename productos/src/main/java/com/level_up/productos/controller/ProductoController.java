@@ -95,4 +95,14 @@ public class ProductoController {
         return ResponseEntity.ok(productos);
     }
 
+    @Operation(summary = "Actualizar producto")
+    @ApiResponse(responseCode = "200", description = "Se actualizo correctamente")
+    @ApiResponse(responseCode = "404", description = "recurso no encontrado")
+    @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    @PutMapping("/{codigoProducto}")
+    public ResponseEntity<ProductoRetornoDTO> actualizarProducto(@PathVariable("codigoProducto") String codigoProducto,@RequestBody ProductoDTO productoDTO){
+        ProductoRetornoDTO productoActualizado = productoService.actualizarProducto(codigoProducto,productoDTO);
+        return ResponseEntity.ok(productoActualizado);
+    }
+
 }

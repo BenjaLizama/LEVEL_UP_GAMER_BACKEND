@@ -172,7 +172,9 @@ public class ProductoService {
             producto.getStock().setCantidad(productoDTO.getCantidadInicial());
         }
 
-
+        if (productoDTO.getCategoriaProducto() != null) {
+            producto.setCategoriaProducto(productoDTO.getCategoriaProducto());
+        }
 
         productoRepository.save(producto);
 
